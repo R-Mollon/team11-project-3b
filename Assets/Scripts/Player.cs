@@ -77,8 +77,8 @@ public class Player : MonoBehaviour {
 		if(Mathf.Abs(xRotation) > 360)
 			xRotation = 0;
 		
-		// Ensure y rotation stays in [-30, 30] and prevent rotation beyond
-		yRotation = Mathf.Clamp(yRotation, -30, 30);
+		// Ensure y rotation stays in [-90, 90] and prevent rotation beyond
+		yRotation = Mathf.Clamp(yRotation, -90, 90);
 		
 		// Rotate camera to proper angle
 		mainCamera.transform.eulerAngles = new Vector3(-yRotation, xRotation, 0);
