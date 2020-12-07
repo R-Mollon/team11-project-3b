@@ -142,7 +142,7 @@ public class Player : MonoBehaviour {
 				position = new Vector3(0.61f, -0.34f, 0.88f);
 				break;
 			case 3:
-				weapon = Instantiate(Resources.Load("Prefabs/AutomaticGun")) as GameObject;
+				weapon = Instantiate(Resources.Load("Prefabs/Shotgun")) as GameObject;
 				position = new Vector3(0.61f, -0.34f, 0.88f);
 				break;
 			case 4:
