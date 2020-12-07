@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour {
 	
@@ -15,16 +16,19 @@ public class Player : MonoBehaviour {
 	
 	
 	/* Ingame weapon data */
-	public int handgunMagazine = 0;
-	public int handgunBullets = 0;
+	public int handgunMagazine;
+	public int handgunBullets;
 	
-	public int automaticMagazine = 0;
-	public int automaticBullets = 0;
+	public int automaticMagazine;
+	public int automaticBullets;
 	
-	public int shotgunLoaded = 0;
-	public int shotgunShells = 0;
+	public int shotgunLoaded;
+	public int shotgunShells;
 	
 	private int equippedWeapon = 1;
+	
+	private Text UIweaponName;
+	private Text UIweaponShots;
 	/**/
 	
 	
@@ -32,6 +36,9 @@ public class Player : MonoBehaviour {
 		
 		playerBody = gameObject.GetComponent<Rigidbody>();
 		mainCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
+		
+		UIweaponName = GameObject.Find("HUD/WeaponData/WeaponName").GetComponent<Text>();
+		UIweaponShots = GameObject.Find("HUD/WeaponData/WeaponShots").GetComponent<Text>();
 		
 		// Lock cursor
 		Cursor.lockState = CursorLockMode.Locked;
@@ -112,9 +119,36 @@ public class Player : MonoBehaviour {
 			equippedWeapon = 4;
 			switchWeapon();
 		}
+	
+		// Render weapon data
+		Vector2 numBullets;
 		
+		switch(equippedWeapon) {
+			case 1:
+			default:
+				UIweaponName.text = "Handgun";
+				numBullets = new Vector2(handgunMagazine, handgunBullets);
+				break;
+			case 2:
+				UIweaponName.text = "Automatic Gun";
+				numBullets = new Vector2(automaticMagazine, automaticBullets);
+				break;
+			case 3:
+				UIweaponName.text = "Shotgun";
+				numBullets = new Vector2(shotgunLoaded, shotgunShells);
+				break;
+			case 4:
+				UIweaponName.text = "Sword";
+				numBullets = new Vector2(0, 0);
+				break;
+		}
 		
-		
+		if(equippedWeapon < 4) {
+			UIweaponShots.text = numBullets.x + "/" + numBullets.y;
+		} else {
+			UIweaponShots.text = "";
+		}
+	
 	}
 	
 	

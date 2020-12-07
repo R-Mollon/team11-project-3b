@@ -10,16 +10,22 @@ public class MachineGun : MonoBehaviour {
 	
 	public float bulletSpeed;
 	
+	public Player player;
+	
 	void Start() {
 		
 		mainCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
+		player = GameObject.Find("Player").GetComponent<Player>();
 		
 	}
 	
 	void Update() {
 		
 		// Check for usage
-		if(Input.GetMouseButton(0) && ready) {
+		if(Input.GetMouseButton(0) && ready && player.automaticMagazine > 0) {
+			
+			// Subtract 1 bullet from magazine
+			player.automaticMagazine--;
 			
 			// Disallow weapon from being used again
 			ready = false;

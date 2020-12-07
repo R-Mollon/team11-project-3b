@@ -10,16 +10,22 @@ public class Handgun : MonoBehaviour {
 	
 	public float bulletSpeed;
 	
+	public Player player;
+	
 	void Start() {
 		
 		mainCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
+		player = GameObject.Find("Player").GetComponent<Player>();
 		
 	}
 	
 	void Update() {
 		
 		// Check for usage
-		if(Input.GetMouseButtonDown(0) && ready) {
+		if(Input.GetMouseButtonDown(0) && ready && player.handgunMagazine > 0) {
+			
+			// Subtract 1 bullet from magazine
+			player.handgunMagazine--;
 			
 			// Disallow weapon from being used again
 			ready = false;

@@ -10,16 +10,22 @@ public class Shotgun : MonoBehaviour {
 	
 	public float bulletSpeed;
 	
+	public Player player;
+	
 	void Start() {
 		
 		mainCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
+		player = GameObject.Find("Player").GetComponent<Player>();
 		
 	}
 	
 	void Update() {
 		
 		// Check for usage
-		if(Input.GetMouseButtonDown(0) && ready) {
+		if(Input.GetMouseButtonDown(0) && ready && player.shotgunLoaded > 0) {
+			
+			// Subtract 1 shell from shotgun
+			player.shotgunLoaded--;
 			
 			// Disallow weapon from being used again
 			ready = false;
