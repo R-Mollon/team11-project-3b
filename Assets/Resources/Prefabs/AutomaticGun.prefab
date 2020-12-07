@@ -91,7 +91,7 @@ GameObject:
   - component: {fileID: 5895552975128272735}
   m_Layer: 0
   m_Name: AutomaticGun
-  m_TagString: Untagged
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

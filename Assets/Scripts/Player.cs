@@ -12,7 +12,21 @@ public class Player : MonoBehaviour {
 	
 	public float playerSpeed = 5.0f;
 	
-	private bool jumpCooldown;
+	
+	
+	/* Ingame weapon data */
+	public int handgunMagazine = 0;
+	public int handgunBullets = 0;
+	
+	public int automaticMagazine = 0;
+	public int automaticBullets = 0;
+	
+	public int shotgunLoaded = 0;
+	public int shotgunShells = 0;
+	
+	private int equippedWeapon = 1;
+	/**/
+	
 	
 	void Start() {
 		
@@ -82,6 +96,67 @@ public class Player : MonoBehaviour {
 		
 		// Rotate camera to proper angle
 		mainCamera.transform.eulerAngles = new Vector3(-yRotation, xRotation, 0);
+		
+		
+		// Check for weapon changes
+		if(Input.GetKey(KeyCode.Alpha1)) {
+			equippedWeapon = 1;
+			switchWeapon();
+		} else if(Input.GetKey(KeyCode.Alpha2)) {
+			equippedWeapon = 2;
+			switchWeapon();
+		} else if(Input.GetKey(KeyCode.Alpha3)) {
+			equippedWeapon = 3;
+			switchWeapon();
+		} else if(Input.GetKey(KeyCode.Alpha4)) {
+			equippedWeapon = 4;
+			switchWeapon();
+		}
+		
+		
+		
+	}
+	
+	
+	// Change weapon player is currently holding
+	private void switchWeapon() {
+		
+		// Destroy currently held weapon
+		foreach(Transform child in mainCamera.gameObject.transform) {
+			if(child.tag == "Weapon")
+				Destroy(child.gameObject);
+		}
+		
+		// Add new weapon
+		GameObject weapon;
+		Vector3 position;
+		
+		switch(equippedWeapon) {
+			case 1:
+			default:
+				weapon = Instantiate(Resources.Load("Prefabs/Handgun")) as GameObject;
+				position = new Vector3(0.61f, -0.34f, 0.88f);
+				break;
+			case 2:
+				weapon = Instantiate(Resources.Load("Prefabs/AutomaticGun")) as GameObject;
+				position = new Vector3(0.61f, -0.34f, 0.88f);
+				break;
+			case 3:
+				weapon = Instantiate(Resources.Load("Prefabs/AutomaticGun")) as GameObject;
+				position = new Vector3(0.61f, -0.34f, 0.88f);
+				break;
+			case 4:
+				weapon = Instantiate(Resources.Load("Prefabs/AutomaticGun")) as GameObject;
+				position = new Vector3(0.61f, -0.34f, 0.88f);
+				break;
+		}
+		
+		weapon.transform.parent = mainCamera.gameObject.transform;
+		weapon.transform.localPosition = position;
+		
+		weapon.transform.localRotation = Quaternion.Euler(0, -100, 0);
+		//weapon.transform.Rotate(0, -100, 0);
+		
 	}
 	
 	

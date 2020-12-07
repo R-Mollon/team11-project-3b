@@ -36,6 +36,7 @@ public class Handgun : MonoBehaviour {
 		
 		// Create a bullet using the bullet prefab
 		GameObject bullet = Instantiate(Resources.Load("Prefabs/Bullet")) as GameObject;
+		bullet.transform.parent = GameObject.Find("Bullets").transform;
 		
 		// Move bullet to camera position and rotation
 		bullet.transform.position = mainCamera.transform.position;
