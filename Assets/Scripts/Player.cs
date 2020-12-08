@@ -25,10 +25,14 @@ public class Player : MonoBehaviour {
 	public int shotgunLoaded;
 	public int shotgunShells;
 	
+	public bool reloading;
 	private int equippedWeapon = 1;
 	
 	private Text UIweaponName;
 	private Text UIweaponShots;
+	private CanvasGroup UIreloadIndicator;
+	private CanvasGroup UIreloadingIndicator;
+	private CanvasGroup UIoutOfAmmoIndicator;
 	/**/
 	
 	
@@ -39,6 +43,9 @@ public class Player : MonoBehaviour {
 		
 		UIweaponName = GameObject.Find("HUD/WeaponData/WeaponName").GetComponent<Text>();
 		UIweaponShots = GameObject.Find("HUD/WeaponData/WeaponShots").GetComponent<Text>();
+		UIreloadIndicator = GameObject.Find("HUD/WeaponData/ReloadIndicator").GetComponent<CanvasGroup>();
+		UIreloadingIndicator = GameObject.Find("HUD/WeaponData/ReloadingIndicator").GetComponent<CanvasGroup>();
+		UIoutOfAmmoIndicator = GameObject.Find("HUD/WeaponData/OutOfAmmoIndicator").GetComponent<CanvasGroup>();
 		
 		// Lock cursor
 		Cursor.lockState = CursorLockMode.Locked;
@@ -105,19 +112,55 @@ public class Player : MonoBehaviour {
 		mainCamera.transform.eulerAngles = new Vector3(-yRotation, xRotation, 0);
 		
 		
+		// Handle weapons
+		handleWeapons();
+		
+		
+	
+	}
+	
+	
+	// handleWeapons is called once per update
+	// It is separated to reduce clutter in Update
+	private void handleWeapons() {
+		
 		// Check for weapon changes
-		if(Input.GetKey(KeyCode.Alpha1)) {
-			equippedWeapon = 1;
-			switchWeapon();
-		} else if(Input.GetKey(KeyCode.Alpha2)) {
-			equippedWeapon = 2;
-			switchWeapon();
-		} else if(Input.GetKey(KeyCode.Alpha3)) {
-			equippedWeapon = 3;
-			switchWeapon();
-		} else if(Input.GetKey(KeyCode.Alpha4)) {
-			equippedWeapon = 4;
-			switchWeapon();
+		if(!reloading) {
+			if(Input.GetKey(KeyCode.Alpha1)) {
+				equippedWeapon = 1;
+				switchWeapon();
+			} else if(Input.GetKey(KeyCode.Alpha2)) {
+				equippedWeapon = 2;
+				switchWeapon();
+			} else if(Input.GetKey(KeyCode.Alpha3)) {
+				equippedWeapon = 3;
+				switchWeapon();
+			} else if(Input.GetKey(KeyCode.Alpha4)) {
+				equippedWeapon = 4;
+				switchWeapon();
+			}
+		}
+		
+		// Check for reload
+		if(Input.GetKey(KeyCode.R)) {
+			
+			// Check current weapon is not full ammo
+			if(
+			(equippedWeapon == 1 && handgunMagazine < 8 && handgunBullets > 0) ||
+			(equippedWeapon == 2 && automaticMagazine < 30 && automaticBullets > 0) ||
+			(equippedWeapon == 3 && shotgunLoaded < 2 && shotgunShells > 0)
+			) {
+			
+				reloading = true;
+				
+				UIreloadIndicator.alpha = 0;
+				UIreloadingIndicator.alpha = 1;
+				
+			}
+		}
+		
+		if(!reloading) {
+			UIreloadingIndicator.alpha = 0;
 		}
 	
 		// Render weapon data
@@ -148,7 +191,35 @@ public class Player : MonoBehaviour {
 		} else {
 			UIweaponShots.text = "";
 		}
-	
+		
+		// Render if current weapon needs to be reloaded
+		UIreloadIndicator.alpha = 0;
+		UIoutOfAmmoIndicator.alpha = 0;
+		switch(equippedWeapon) {
+			case 1:
+				if(handgunMagazine <= 0 && !reloading && handgunBullets > 0)
+					UIreloadIndicator.alpha = 1;
+				if(handgunMagazine <= 0 && handgunBullets <= 0)
+					UIoutOfAmmoIndicator.alpha = 1;
+				break;
+			case 2:
+				if(automaticMagazine <= 0 && !reloading && automaticBullets > 0)
+					UIreloadIndicator.alpha = 1;
+				if(automaticMagazine <= 0 && automaticBullets <= 0)
+					UIoutOfAmmoIndicator.alpha = 1;
+				break;
+			case 3:
+				if(shotgunLoaded <= 0 && !reloading && shotgunShells > 0)
+					UIreloadIndicator.alpha = 1;
+				if(shotgunLoaded <= 0 && shotgunShells <= 0)
+					UIoutOfAmmoIndicator.alpha = 1;
+				break;
+			case 4:
+			default:
+				UIreloadIndicator.alpha = 0;
+				break;
+		}
+		
 	}
 	
 	

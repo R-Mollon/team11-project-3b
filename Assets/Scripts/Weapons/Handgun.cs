@@ -12,17 +12,25 @@ public class Handgun : MonoBehaviour {
 	
 	public Player player;
 	
+	
+	private bool isReloading;
+	private int maxBullets = 8;
+	private float reloadTime = 2.0f;
+	
+	private RectTransform reloadProgress;
+	
 	void Start() {
 		
 		mainCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
 		player = GameObject.Find("Player").GetComponent<Player>();
+		reloadProgress = GameObject.Find("HUD/WeaponData/ReloadingIndicator/ReloadingBarProgress").GetComponent<RectTransform>();
 		
 	}
 	
 	void Update() {
 		
 		// Check for usage
-		if(Input.GetMouseButtonDown(0) && ready && player.handgunMagazine > 0) {
+		if(Input.GetMouseButtonDown(0) && ready && player.handgunMagazine > 0 && !player.reloading) {
 			
 			// Subtract 1 bullet from magazine
 			player.handgunMagazine--;
@@ -33,6 +41,13 @@ public class Handgun : MonoBehaviour {
 			// Activate the weapon
 			StartCoroutine("ActivateWeapon");
 			
+		}
+		
+		// Check for reload
+		if(player.reloading && !isReloading) {
+			isReloading = true;
+			
+			StartCoroutine("ReloadWeapon");
 		}
 		
 	}
@@ -75,4 +90,47 @@ public class Handgun : MonoBehaviour {
 		
 	}
 	
+	
+	IEnumerator ReloadWeapon() {
+		
+		for(int i = 0; i < 100; i++) {
+			
+			reloadProgress.sizeDelta = new Vector2(i, 10);
+			reloadProgress.localPosition = new Vector3((i / 2) - 50, 0, 0);
+			
+			yield return new WaitForSeconds(reloadTime / 100.0f);
+			
+		}
+		
+		isReloading = false;
+		player.reloading = false;
+		
+		if(player.handgunBullets >= (maxBullets - player.handgunMagazine)) {
+			// Player has enough bullets to fill magazine
+			player.handgunBullets -= (maxBullets - player.handgunMagazine);
+			player.handgunMagazine = maxBullets;
+		} else {
+			// Player does not have enough bullets to fully fill magazine
+			player.handgunMagazine += player.handgunBullets;
+			player.handgunBullets = 0;
+		}
+		
+	}
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

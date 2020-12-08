@@ -12,17 +12,24 @@ public class MachineGun : MonoBehaviour {
 	
 	public Player player;
 	
+	private bool isReloading;
+	private int maxBullets = 30;
+	private float reloadTime = 3.0f;
+	
+	private RectTransform reloadProgress;
+	
 	void Start() {
 		
 		mainCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
 		player = GameObject.Find("Player").GetComponent<Player>();
+		reloadProgress = GameObject.Find("HUD/WeaponData/ReloadingIndicator/ReloadingBarProgress").GetComponent<RectTransform>();
 		
 	}
 	
 	void Update() {
 		
 		// Check for usage
-		if(Input.GetMouseButton(0) && ready && player.automaticMagazine > 0) {
+		if(Input.GetMouseButton(0) && ready && player.automaticMagazine > 0 && !player.reloading) {
 			
 			// Subtract 1 bullet from magazine
 			player.automaticMagazine--;
@@ -33,6 +40,13 @@ public class MachineGun : MonoBehaviour {
 			// Activate the weapon
 			StartCoroutine("ActivateWeapon");
 			
+		}
+		
+		// Check for reload
+		if(player.reloading && !isReloading) {
+			isReloading = true;
+			
+			StartCoroutine("ReloadWeapon");
 		}
 		
 	}
@@ -72,6 +86,33 @@ public class MachineGun : MonoBehaviour {
 		
 		ready = true;
 		yield return null;
+		
+	}
+	
+	
+	IEnumerator ReloadWeapon() {
+		
+		for(int i = 0; i < 100; i++) {
+			
+			reloadProgress.sizeDelta = new Vector2(i, 10);
+			reloadProgress.localPosition = new Vector3((i / 2) - 50, 0, 0);
+			
+			yield return new WaitForSeconds(reloadTime / 100.0f);
+			
+		}
+		
+		isReloading = false;
+		player.reloading = false;
+		
+		if(player.automaticBullets >= (maxBullets - player.automaticMagazine)) {
+			// Player has enough bullets to fill magazine
+			player.automaticBullets -= (maxBullets - player.automaticMagazine);
+			player.automaticMagazine = maxBullets;
+		} else {
+			// Player does not have enough bullets to fully fill magazine
+			player.automaticMagazine += player.automaticBullets;
+			player.automaticBullets = 0;
+		}
 		
 	}
 	
