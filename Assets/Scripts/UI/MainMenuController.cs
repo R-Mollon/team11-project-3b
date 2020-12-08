@@ -51,4 +51,13 @@ public class MainMenuController : MonoBehaviour {
 		
 	}
 	
+	public void quitGame(int ignoreLevel) {
+
+		#if UNITY_EDITOR
+			UnityEditor.EditorApplication.isPlaying = false;
+		#else
+			Application.Quit();
+		#endif
+    }
+	
 }
