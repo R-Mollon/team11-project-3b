@@ -11,10 +11,13 @@ public class Sword : MonoBehaviour {
 	
 	public Player player;
 	
+	private AudioSource swingSound;
+	
 	void Start() {
 		
 		mainCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
 		player = GameObject.Find("Player").GetComponent<Player>();
+		swingSound = gameObject.GetComponent<AudioSource>();
 		
 	}
 	
@@ -36,16 +39,18 @@ public class Sword : MonoBehaviour {
 	
 	IEnumerator ActivateWeapon() {
 		
+		swingSound.Play(0);
+		
 		// Do swinging animation
-		for(int i = 1; i < 101; i++) {
+		for(int i = 1; i < 81; i++) {
 			
-			if(i < 50) {
+			if(i < 40) {
 				
 				transform.Rotate(20.0f / i, -5.0f / i, 0);
 				
-			} else if(i > 50) {
+			} else if(i > 40) {
 				
-				transform.Rotate(-20.0f / (i - 50), 5.0f /  (i - 50), 0);
+				transform.Rotate(-20.0f / (i - 40), 5.0f /  (i - 40), 0);
 				
 			}
 			
