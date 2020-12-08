@@ -1,17 +1,22 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] GameObject _hitPrefab;
+    [SerializeField] int _health = 3;
+
+    int _currentHealth;
+
+    void OnEnable()
     {
-        
+        _currentHealth = _health;
     }
 
-    // Update is called once per frame
+
     void Update()
     {
         var player = FindObjectOfType<Player>();
@@ -19,6 +24,10 @@ public class Enemy : MonoBehaviour
     }
     public void TakeDamage()
     {
-        gameObject.SetActive(false);
+        _currentHealth--;
+        //Instantiate(_hitPrefab, transform.postion, transform.rotation);
+
+        if (_currentHealth <= 0)
+            gameObject.SetActive(false);
     }
 }
