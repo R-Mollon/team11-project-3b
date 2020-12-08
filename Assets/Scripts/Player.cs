@@ -132,16 +132,16 @@ public class Player : MonoBehaviour {
 		
 		// Check for weapon changes
 		if(!reloading && !firing) {
-			if(Input.GetKey(KeyCode.Alpha1)) {
+			if(Input.GetKey(KeyCode.Alpha1) && hasHandgun) {
 				equippedWeapon = 1;
 				switchWeapon();
-			} else if(Input.GetKey(KeyCode.Alpha2)) {
+			} else if(Input.GetKey(KeyCode.Alpha2) && hasAutomatic) {
 				equippedWeapon = 2;
 				switchWeapon();
-			} else if(Input.GetKey(KeyCode.Alpha3)) {
+			} else if(Input.GetKey(KeyCode.Alpha3) && hasShotgun) {
 				equippedWeapon = 3;
 				switchWeapon();
-			} else if(Input.GetKey(KeyCode.Alpha4)) {
+			} else if(Input.GetKey(KeyCode.Alpha4) && hasSword) {
 				equippedWeapon = 4;
 				switchWeapon();
 			}
