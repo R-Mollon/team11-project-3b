@@ -7,6 +7,7 @@ using UnityEngine.AI;
 public class Enemy : MonoBehaviour
 {
     [SerializeField] GameObject _hitPrefab;
+    [SerializeField] GameObject _explosionPrefab;
     [SerializeField] int _health = 3;
 
     int _currentHealth;
@@ -28,6 +29,10 @@ public class Enemy : MonoBehaviour
         Instantiate(_hitPrefab, transform.position, transform.rotation);
 
         if (_currentHealth <= 0)
+        {
+            Instantiate(_explosionPrefab, transform.position, transform.rotation);
             gameObject.SetActive(false);
+        }
+            
     }
 }
