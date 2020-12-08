@@ -126,7 +126,7 @@ public class Player : MonoBehaviour {
 	private void handleWeapons() {
 		
 		// Check for weapon changes
-		if(!reloading) {
+		if(!reloading && !firing) {
 			if(Input.GetKey(KeyCode.Alpha1)) {
 				equippedWeapon = 1;
 				switchWeapon();
