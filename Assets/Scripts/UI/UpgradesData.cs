@@ -113,24 +113,24 @@ public class UpgradesData : MonoBehaviour {
 		
 		// Mark cells
 		for(int i = 0; i < playerData.handgunDamageUpgrades && i < 7; i++)
-			handgunDamageCells[i].color = new Color(0.1f, 0.8f, 0.1f);
+			handgunDamageCells[i+1].color = new Color(0.1f, 0.8f, 0.1f);
 		for(int i = 0; i < playerData.handgunReloadUpgrades && i < 7; i++)
-			handgunReloadCells[i].color = new Color(0.1f, 0.8f, 0.1f);
+			handgunReloadCells[i+1].color = new Color(0.1f, 0.8f, 0.1f);
 		
 		for(int i = 0; i < playerData.automaticDamageUpgrades && i < 7; i++)
-			automaticDamageCells[i].color = new Color(0.1f, 0.8f, 0.1f);
+			automaticDamageCells[i+1].color = new Color(0.1f, 0.8f, 0.1f);
 		for(int i = 0; i < playerData.automaticReloadUpgrades && i < 7; i++)
-			automaticReloadCells[i].color = new Color(0.1f, 0.8f, 0.1f);
+			automaticReloadCells[i+1].color = new Color(0.1f, 0.8f, 0.1f);
 		
 		for(int i = 0; i < playerData.shotgunDamageUpgrades && i < 7; i++)
-			shotgunDamageCells[i].color = new Color(0.1f, 0.8f, 0.1f);
+			shotgunDamageCells[i+1].color = new Color(0.1f, 0.8f, 0.1f);
 		for(int i = 0; i < playerData.shotgunReloadUpgrades && i < 7; i++)
-			shotgunReloadCells[i].color = new Color(0.1f, 0.8f, 0.1f);
+			shotgunReloadCells[i+1].color = new Color(0.1f, 0.8f, 0.1f);
 		
 		for(int i = 0; i < playerData.moveSpeedUpgrades && i < 7; i++)
-			moveSpeedCells[i].color = new Color(0.1f, 0.8f, 0.1f);
+			moveSpeedCells[i+1].color = new Color(0.1f, 0.8f, 0.1f);
 		for(int i = 0; i < playerData.creditsMultUpgrades && i < 7; i++)
-			creditsMultCells[i].color = new Color(0.1f, 0.8f, 0.1f);
+			creditsMultCells[i+1].color = new Color(0.1f, 0.8f, 0.1f);
 		
 		
 		// Update button amounts
