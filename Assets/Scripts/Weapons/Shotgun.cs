@@ -13,12 +13,16 @@ public class Shotgun : MonoBehaviour {
 	public Player player;
 	
 	private bool isReloading;
-	private int maxShells = 2;
-	private float reloadTime = 2.7f;
+	private int maxShells = 6;
+	private float reloadTime = 4.8f;
 	
 	private RectTransform reloadProgress;
 	private AudioSource shotSound;
 	private AudioSource reloadSound;
+	private AudioSource dryShotSound;
+	
+	private Transform pump;
+	private Transform trigger;
 	
 	void Start() {
 		
@@ -26,20 +30,29 @@ public class Shotgun : MonoBehaviour {
 		player = GameObject.Find("Player").GetComponent<Player>();
 		reloadProgress = GameObject.Find("HUD/WeaponData/ReloadingIndicator/ReloadingBarProgress").GetComponent<RectTransform>();
 		shotSound = gameObject.GetComponent<AudioSource>();
-		reloadSound = transform.GetChild(1).GetComponent<AudioSource>();
+		reloadSound = transform.GetChild(0).GetComponent<AudioSource>();
+		dryShotSound = transform.GetChild(1).GetComponent<AudioSource>();
+		
+		pump = transform.GetChild(2).transform;
+		trigger = transform.GetChild(3).transform;
 		
 	}
 	
 	void Update() {
 		
+		if(Input.GetMouseButtonDown(0) && player.shotgunLoaded == 0 && !player.reloading && !dryShotSound.isPlaying) {
+			dryShotSound.Play(0);
+		}
+		
 		// Check for usage
-		if(Input.GetMouseButtonDown(0) && ready && player.shotgunLoaded > 0) {
+		if(Input.GetMouseButtonDown(0) && ready && player.shotgunLoaded > 0 && !player.reloading) {
 			
 			// Subtract 1 shell from shotgun
 			player.shotgunLoaded--;
 				
 			// Disallow weapon from being used again
 			ready = false;
+			player.firing = true;
 			
 			// Activate the weapon
 			StartCoroutine("ActivateWeapon");
@@ -83,20 +96,38 @@ public class Shotgun : MonoBehaviour {
 		}
 		
 		// Do firing animation
-		for(int i = 0; i < 50; i++) {
+		for(int i = 0; i < 75; i++) {
 			
-			if(i < 25) {
+			if(i < 10) {
 				// Rotate weapon upwards
-				transform.Rotate(0, 0, 1f);
-			} else {
+				transform.Rotate(2f, 0, 0);
+				
+				// Move trigger
+				trigger.Translate(0, 0, 0.0015f);
+			} else if(i < 20) {
 				// Rotate back downwards
-				transform.Rotate(0, 0, -1f);
+				transform.Rotate(-2f, 0, 0);
+				
+				// Move trigger
+				trigger.Translate(0, 0, -0.0015f);
 			}
 			
-			yield return new WaitForSeconds(0.0001f);
+			if(i > 40 && i < 55) {
+				pump.Translate(0, 0, -0.01f);
+			} else if(i > 55 && i < 70) {
+				pump.Translate(0, 0, 0.01f);
+			}
+			
+			yield return new WaitForSeconds(0.01f);
 			
 		}
 		
+		// Reset everythings position/rotation to make sure we dont drift
+		transform.localRotation = Quaternion.Euler(0, 180, 0);
+		trigger.localPosition = new Vector3(0, -0.03839342f, 0.125f);
+		pump.localPosition = new Vector3(0, -0.03153691f, -0.1396921f);
+		
+		player.firing = false;
 		ready = true;
 		yield return null;
 		
@@ -112,9 +143,18 @@ public class Shotgun : MonoBehaviour {
 			reloadProgress.sizeDelta = new Vector2(i, 10);
 			reloadProgress.localPosition = new Vector3((i / 2) - 50, 0, 0);
 			
+			if(i < 8) {
+				transform.Rotate(2f, 0, 2f);
+			} else if(i > 92) {
+				transform.Rotate(-2f, 0, -2f);
+			}
+			
 			yield return new WaitForSeconds(reloadTime / 100.0f);
 			
 		}
+		
+		// Reset everythings position/rotation to make sure we dont drift
+		transform.localRotation = Quaternion.Euler(0, 180, 0);
 		
 		isReloading = false;
 		player.reloading = false;

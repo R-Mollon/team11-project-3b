@@ -26,6 +26,7 @@ public class Player : MonoBehaviour {
 	public int shotgunShells;
 	
 	public bool reloading;
+	public bool firing;
 	private int equippedWeapon = 1;
 	
 	private Text UIweaponName;
@@ -142,13 +143,13 @@ public class Player : MonoBehaviour {
 		}
 		
 		// Check for reload
-		if(Input.GetKey(KeyCode.R)) {
+		if(Input.GetKey(KeyCode.R) && !reloading && !firing) {
 			
 			// Check current weapon is not full ammo
 			if(
 			(equippedWeapon == 1 && handgunMagazine < 8 && handgunBullets > 0) ||
 			(equippedWeapon == 2 && automaticMagazine < 30 && automaticBullets > 0) ||
-			(equippedWeapon == 3 && shotgunLoaded < 2 && shotgunShells > 0)
+			(equippedWeapon == 3 && shotgunLoaded < 6 && shotgunShells > 0)
 			) {
 			
 				reloading = true;
@@ -173,7 +174,7 @@ public class Player : MonoBehaviour {
 				numBullets = new Vector2(handgunMagazine, handgunBullets);
 				break;
 			case 2:
-				UIweaponName.text = "Automatic Gun";
+				UIweaponName.text = "M4";
 				numBullets = new Vector2(automaticMagazine, automaticBullets);
 				break;
 			case 3:
@@ -245,14 +246,14 @@ public class Player : MonoBehaviour {
 				rotation = Quaternion.Euler(0, 180, 0);
 				break;
 			case 2:
-				weapon = Instantiate(Resources.Load("Prefabs/AutomaticGun")) as GameObject;
-				position = new Vector3(0.61f, -0.34f, 0.88f);
-				rotation = Quaternion.Euler(0, -100, 0);
+				weapon = Instantiate(Resources.Load("Prefabs/AutomaticGunM4")) as GameObject;
+				position = new Vector3(0.49f, -0.3f, 0.74f);
+				rotation = Quaternion.Euler(0, 180, 0);
 				break;
 			case 3:
 				weapon = Instantiate(Resources.Load("Prefabs/Shotgun")) as GameObject;
-				position = new Vector3(0.61f, -0.34f, 0.88f);
-				rotation = Quaternion.Euler(0, -100, 0);
+				position = new Vector3(0.49f, -0.14f, 0.78f);
+				rotation = Quaternion.Euler(0, 180, 0);
 				break;
 			case 4:
 				weapon = Instantiate(Resources.Load("Prefabs/Sword")) as GameObject;

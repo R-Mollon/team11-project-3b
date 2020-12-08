@@ -14,11 +14,16 @@ public class MachineGun : MonoBehaviour {
 	
 	private bool isReloading;
 	private int maxBullets = 30;
-	private float reloadTime = 4.7f;
+	private float reloadTime = 2.7f;
 	
 	private RectTransform reloadProgress;
 	private AudioSource shotSound;
+	private AudioSource dryShotSound;
 	private AudioSource reloadSound;
+	
+	private Transform bolt;
+	private Transform magazine;
+	private Transform trigger;
 	
 	void Start() {
 		
@@ -26,11 +31,20 @@ public class MachineGun : MonoBehaviour {
 		player = GameObject.Find("Player").GetComponent<Player>();
 		reloadProgress = GameObject.Find("HUD/WeaponData/ReloadingIndicator/ReloadingBarProgress").GetComponent<RectTransform>();
 		shotSound = gameObject.GetComponent<AudioSource>();
-		reloadSound = transform.GetChild(1).GetComponent<AudioSource>();
+		reloadSound = transform.GetChild(0).GetComponent<AudioSource>();
+		dryShotSound = transform.GetChild(1).GetComponent<AudioSource>();
+		
+		bolt = transform.GetChild(2).transform;
+		magazine = transform.GetChild(3).transform;
+		trigger = transform.GetChild(6).transform;
 		
 	}
 	
 	void Update() {
+		
+		if(Input.GetMouseButton(0) && player.automaticMagazine == 0 && !player.reloading && !dryShotSound.isPlaying) {
+			dryShotSound.Play(0);
+		}
 		
 		// Check for usage
 		if(Input.GetMouseButton(0) && ready && player.automaticMagazine > 0 && !player.reloading) {
@@ -40,6 +54,7 @@ public class MachineGun : MonoBehaviour {
 			
 			// Disallow weapon from being used again
 			ready = false;
+			player.firing = true;
 			
 			// Activate the weapon
 			StartCoroutine("ActivateWeapon");
@@ -77,20 +92,38 @@ public class MachineGun : MonoBehaviour {
 		bullet.transform.Rotate(90, 0, 0);
 		
 		// Do firing animation
-		for(int i = 0; i < 20; i++) {
+		for(int i = 0; i < 10; i++) {
 			
-			if(i < 10) {
+			if(i < 5) {
 				// Rotate weapon upwards
-				transform.Rotate(0, 0, 1f);
+				transform.Rotate(0.5f, 0, 0);
+				
+				// Move bolt
+				bolt.Translate(0, 0, 0.005f);
+				
+				// Move trigger
+				trigger.Translate(0, 0, 0.0015f);
 			} else {
 				// Rotate back downwards
-				transform.Rotate(0, 0, -1f);
+				transform.Rotate(-0.5f, 0, 0);
+				
+				// Move bolt
+				bolt.Translate(0, 0, -0.005f);
+				
+				// Move trigger
+				trigger.Translate(0, 0, -0.0015f);
 			}
 			
-			yield return new WaitForSeconds(0.00001f);
+			yield return new WaitForSecondsRealtime(0.01f);
 			
 		}
 		
+		// Reset everythings position/rotation to make sure we dont drift
+		transform.localRotation = Quaternion.Euler(0, 180, 0);
+		bolt.localPosition = new Vector3(0, 0.07780132f, 0.1563036f);
+		trigger.localPosition = new Vector3(0, 0.01301076f, 0.09446944f);
+		
+		player.firing = false;
 		ready = true;
 		yield return null;
 		
@@ -101,14 +134,33 @@ public class MachineGun : MonoBehaviour {
 		
 		reloadSound.Play(0);
 		
-		for(int i = 0; i < 100; i++) {
+		for(int i = 0; i < 50; i++) {
 			
-			reloadProgress.sizeDelta = new Vector2(i, 10);
-			reloadProgress.localPosition = new Vector3((i / 2) - 50, 0, 0);
+			reloadProgress.sizeDelta = new Vector2(i * 2, 10);
+			reloadProgress.localPosition = new Vector3(i - 50, 0, 0);
 			
-			yield return new WaitForSeconds(reloadTime / 100.0f);
+			// Reload animation
+			if(i < 4) {
+				// Tilt gun
+				transform.Rotate(5.0f, 0, 5.0f);
+			} else if(i > 10 && i < 15) {
+				// Remove magazine
+				magazine.Translate(0, -0.18f, 0.015f);
+			} else if(i > 35 && i < 40) {
+				// Insert magazine
+				magazine.Translate(0, 0.18f, -0.015f);
+			} else if(i > 45) {
+				// Tilt gun back
+				transform.Rotate(-5.0f, 0, -5.0f);
+			}
+			
+			yield return new WaitForSecondsRealtime(reloadTime / 50.0f);
 			
 		}
+		
+		// Reset everythings position/rotation to make sure we dont drift
+		transform.localRotation = Quaternion.Euler(0, 180, 0);
+		magazine.localPosition = new Vector3(0, 0, 0);
 		
 		isReloading = false;
 		player.reloading = false;

@@ -57,6 +57,7 @@ public class Handgun : MonoBehaviour {
 			
 			// Disallow weapon from being used again
 			ready = false;
+			player.firing = true;
 			
 			// Activate the weapon
 			StartCoroutine("ActivateWeapon");
@@ -114,6 +115,12 @@ public class Handgun : MonoBehaviour {
 			
 		}
 		
+		// Reset everythings position/rotation to make sure we dont drift
+		transform.localRotation = Quaternion.Euler(0, 180, 0);
+		if(player.handgunMagazine > 0)
+			slider.localPosition = new Vector3(0, 0.008086923f, -0.1387274f);
+		
+		player.firing = false;
 		ready = true;
 		yield return null;
 		
@@ -173,7 +180,7 @@ public class Handgun : MonoBehaviour {
 		}
 		
 		// Reset slider back to starting position
-		slider.localPosition = new Vector3(slider.localPosition.x, slider.localPosition.y, -0.1387274f);
+		slider.localPosition = new Vector3(0, 0.008086923f, -0.1387274f);
 		
 	}
 	
