@@ -17,12 +17,14 @@ public class Shotgun : MonoBehaviour {
 	private float reloadTime = 4.0f;
 	
 	private RectTransform reloadProgress;
+	private AudioSource shotSound;
 	
 	void Start() {
 		
 		mainCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
 		player = GameObject.Find("Player").GetComponent<Player>();
 		reloadProgress = GameObject.Find("HUD/WeaponData/ReloadingIndicator/ReloadingBarProgress").GetComponent<RectTransform>();
+		shotSound = gameObject.GetComponent<AudioSource>();
 		
 	}
 	
@@ -53,6 +55,9 @@ public class Shotgun : MonoBehaviour {
 	
 	
 	IEnumerator ActivateWeapon() {
+		
+		// Play shot sound
+		shotSound.PlayOneShot(shotSound.clip, 1);
 		
 		// Create ten bullets
 		for(int i = 0; i < 10; i++) {

@@ -17,12 +17,14 @@ public class MachineGun : MonoBehaviour {
 	private float reloadTime = 3.0f;
 	
 	private RectTransform reloadProgress;
+	private AudioSource shotSound;
 	
 	void Start() {
 		
 		mainCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
 		player = GameObject.Find("Player").GetComponent<Player>();
 		reloadProgress = GameObject.Find("HUD/WeaponData/ReloadingIndicator/ReloadingBarProgress").GetComponent<RectTransform>();
+		shotSound = gameObject.GetComponent<AudioSource>();
 		
 	}
 	
@@ -53,6 +55,9 @@ public class MachineGun : MonoBehaviour {
 	
 	
 	IEnumerator ActivateWeapon() {
+		
+		// Play shot sound
+		shotSound.PlayOneShot(shotSound.clip, 1);
 		
 		// Create a bullet using the bullet prefab
 		GameObject bullet = Instantiate(Resources.Load("Prefabs/Bullet")) as GameObject;
