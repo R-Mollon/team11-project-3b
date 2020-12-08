@@ -95,7 +95,7 @@ public class Player : MonoBehaviour {
 		playerBody.velocity = newVelocity;
 		
 		// Teleport camera to position of player body
-		mainCamera.transform.position = transform.position;
+		mainCamera.transform.position = transform.position + transform.up;
 		
 		// Add mouse x and y positions to rotation values
 		xRotation += Input.GetAxis("Mouse X");
