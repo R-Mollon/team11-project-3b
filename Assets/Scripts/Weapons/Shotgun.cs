@@ -37,7 +37,7 @@ public class Shotgun : MonoBehaviour {
 			
 			// Subtract 1 shell from shotgun
 			player.shotgunLoaded--;
-			
+				
 			// Disallow weapon from being used again
 			ready = false;
 			

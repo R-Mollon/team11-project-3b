@@ -235,32 +235,36 @@ public class Player : MonoBehaviour {
 		// Add new weapon
 		GameObject weapon;
 		Vector3 position;
+		Quaternion rotation;
 		
 		switch(equippedWeapon) {
 			case 1:
 			default:
 				weapon = Instantiate(Resources.Load("Prefabs/Handgun")) as GameObject;
 				position = new Vector3(0.61f, -0.34f, 0.88f);
+				rotation = Quaternion.Euler(0, -100, 0);
 				break;
 			case 2:
 				weapon = Instantiate(Resources.Load("Prefabs/AutomaticGun")) as GameObject;
 				position = new Vector3(0.61f, -0.34f, 0.88f);
+				rotation = Quaternion.Euler(0, -100, 0);
 				break;
 			case 3:
 				weapon = Instantiate(Resources.Load("Prefabs/Shotgun")) as GameObject;
 				position = new Vector3(0.61f, -0.34f, 0.88f);
+				rotation = Quaternion.Euler(0, -100, 0);
 				break;
 			case 4:
-				weapon = Instantiate(Resources.Load("Prefabs/AutomaticGun")) as GameObject;
-				position = new Vector3(0.61f, -0.34f, 0.88f);
+				weapon = Instantiate(Resources.Load("Prefabs/Sword")) as GameObject;
+				position = new Vector3(0.93f, -1.17f, 1.57f);
+				rotation = Quaternion.Euler(0, -30, 0);
 				break;
 		}
 		
 		weapon.transform.parent = mainCamera.gameObject.transform;
 		weapon.transform.localPosition = position;
 		
-		weapon.transform.localRotation = Quaternion.Euler(0, -100, 0);
-		//weapon.transform.Rotate(0, -100, 0);
+		weapon.transform.localRotation = rotation;
 		
 	}
 	
