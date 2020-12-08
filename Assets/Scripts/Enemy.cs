@@ -17,4 +17,8 @@ public class Enemy : MonoBehaviour
         var player = FindObjectOfType<Player>();
         GetComponent<NavMeshAgent>().SetDestination(player.transform.position);
     }
+    public void TakeDamage()
+    {
+        gameObject.SetActive(false);
+    }
 }
