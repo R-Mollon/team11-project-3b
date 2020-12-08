@@ -57,7 +57,7 @@ public class MachineGun : MonoBehaviour {
 	IEnumerator ActivateWeapon() {
 		
 		// Play shot sound
-		shotSound.PlayOneShot(shotSound.clip, 1);
+		shotSound.PlayOneShot(shotSound.clip, 0.75f);
 		
 		// Create a bullet using the bullet prefab
 		GameObject bullet = Instantiate(Resources.Load("Prefabs/Bullet")) as GameObject;
