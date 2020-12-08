@@ -1255,7 +1255,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 176000959}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1954975703}
+        m_MethodName: buyUpgrade
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 5
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
 --- !u!114 &176000959
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1374,7 +1385,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 188207362}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1954975703}
+        m_MethodName: buyUpgrade
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
 --- !u!114 &188207362
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1535,7 +1557,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 194295357}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1954975703}
+        m_MethodName: buyUpgrade
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
 --- !u!114 &194295357
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2296,7 +2329,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 322851691}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1954975703}
+        m_MethodName: buyUpgrade
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 6
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
 --- !u!114 &322851691
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5028,7 +5072,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 798832684}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1954975703}
+        m_MethodName: buyUpgrade
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 7
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
 --- !u!114 &798832684
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7555,6 +7610,7 @@ RectTransform:
   - {fileID: 1393520471}
   - {fileID: 108482505}
   - {fileID: 1395254745}
+  - {fileID: 1954975702}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7644,7 +7700,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1375438349}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1954975703}
+        m_MethodName: buyUpgrade
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 3
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
 --- !u!114 &1375438349
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8112,6 +8179,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1395254745}
+  - component: {fileID: 1395254746}
   m_Layer: 5
   m_Name: UpgradesHover
   m_TagString: Untagged
@@ -8138,9 +8206,21 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -11.88, y: 52.92}
+  m_AnchoredPosition: {x: -11.88, y: 53.725}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!225 &1395254746
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1395254744}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1397710987
 GameObject:
   m_ObjectHideFlags: 0
@@ -8844,7 +8924,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2ff08ab2476fa0438eac70783b529c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  credits: 0
+  credits: 1000000
   handgunDamage: 1
   handgunDamageUpgrades: 0
   handgunReload: 1
@@ -9475,7 +9555,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1642604592}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1954975703}
+        m_MethodName: buyUpgrade
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 4
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
 --- !u!114 &1642604592
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10529,7 +10620,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -2, y: -1.4}
+  m_AnchoredPosition: {x: -2, y: -1.35}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1903770631
@@ -10566,8 +10657,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -9.35, y: 53.66}
-  m_SizeDelta: {x: 200, y: 60}
+  m_AnchoredPosition: {x: -9.12, y: 53.66}
+  m_SizeDelta: {x: 300, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1903770633
 MonoBehaviour:
@@ -10610,6 +10701,129 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1903770631}
   m_CullTransparentMesh: 0
+--- !u!1 &1954975701
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1954975702}
+  - component: {fileID: 1954975703}
+  m_Layer: 0
+  m_Name: Upgrades Data
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1954975702
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1954975701}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1361668769}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1954975703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1954975701}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e06c85097a2fd243ae2c5286826545e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  handgunDamageCosts: 000000000a000000140000002800000050000000a00000004001000080020000
+  handgunDamageAmounts:
+  - 1
+  - 1.3
+  - 1.5
+  - 1.7
+  - 1.9
+  - 2.1
+  - 2.3
+  - 2.5
+  handgunReloadCosts: 000000000a000000140000002800000050000000a00000004001000080020000
+  handgunReloadAmounts:
+  - 1
+  - 1.1
+  - 1.2
+  - 1.3
+  - 1.35
+  - 1.41
+  - 1.46
+  - 1.5
+  automaticDamageCosts: 000000000a000000140000002800000050000000a00000004001000080020000
+  automaticDamageAmounts:
+  - 1
+  - 1.3
+  - 1.5
+  - 1.7
+  - 1.9
+  - 2.1
+  - 2.3
+  - 2.5
+  automaticReloadCosts: 000000000a000000140000002800000050000000a00000004001000080020000
+  automaticReloadAmounts:
+  - 1
+  - 1.2
+  - 1.4
+  - 1.6
+  - 1.7
+  - 1.8
+  - 1.9
+  - 2
+  shotgunDamageCosts: 000000000a000000140000002800000050000000a00000004001000080020000
+  shotgunDamageAmounts:
+  - 1
+  - 1.3
+  - 1.5
+  - 1.7
+  - 1.9
+  - 2.1
+  - 2.3
+  - 2.5
+  shotgunReloadCosts: 000000000a000000140000002800000050000000a00000004001000080020000
+  shotgunReloadAmounts:
+  - 1
+  - 1.4
+  - 1.7
+  - 2
+  - 2.3
+  - 2.6
+  - 2.8
+  - 3
+  moveSpeedCosts: 000000000a000000140000002800000050000000a00000004001000080020000
+  moveSpeedAmounts:
+  - 1
+  - 1.2
+  - 1.4
+  - 1.6
+  - 1.7
+  - 1.8
+  - 1.9
+  - 2
+  creditsMultCosts: 000000000a000000140000002800000050000000a00000004001000080020000
+  creditsMultAmounts:
+  - 1
+  - 1.2
+  - 1.4
+  - 1.6
+  - 1.7
+  - 1.8
+  - 1.9
+  - 2
 --- !u!1 &1985345320
 GameObject:
   m_ObjectHideFlags: 0
@@ -11147,7 +11361,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2111250781}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1954975703}
+        m_MethodName: buyUpgrade
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
 --- !u!114 &2111250781
 MonoBehaviour:
   m_ObjectHideFlags: 0

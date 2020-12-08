@@ -8,24 +8,24 @@ public class PersistantData : MonoBehaviour
 	public int credits = 0;
 	
 	/* Permanent Upgrades */
-	public int handgunDamage = 1;
+	public float handgunDamage = 1;
 	public int handgunDamageUpgrades = 0;
-	public int handgunReload = 1;
+	public float handgunReload = 1;
 	public int handgunReloadUpgrades = 0;
 	
-	public int automaticDamage = 1;
+	public float automaticDamage = 1;
 	public int automaticDamageUpgrades = 0;
-	public int automaticReload = 1;
+	public float automaticReload = 1;
 	public int automaticReloadUpgrades = 0;
 	
-	public int shotgunDamage = 1;
+	public float shotgunDamage = 1;
 	public int shotgunDamageUpgrades = 0;
-	public int shotgunReload = 1;
+	public float shotgunReload = 1;
 	public int shotgunReloadUpgrades = 0;
 	
-	public int moveSpeed = 1;
+	public float moveSpeed = 1;
 	public int moveSpeedUpgrades = 0;
-	public int creditsMult = 1;
+	public float creditsMult = 1;
 	public int creditsMultUpgrades = 0;
 	/* ------------------ */
 	
