@@ -14,10 +14,11 @@ public class Shotgun : MonoBehaviour {
 	
 	private bool isReloading;
 	private int maxShells = 2;
-	private float reloadTime = 4.0f;
+	private float reloadTime = 2.7f;
 	
 	private RectTransform reloadProgress;
 	private AudioSource shotSound;
+	private AudioSource reloadSound;
 	
 	void Start() {
 		
@@ -25,6 +26,7 @@ public class Shotgun : MonoBehaviour {
 		player = GameObject.Find("Player").GetComponent<Player>();
 		reloadProgress = GameObject.Find("HUD/WeaponData/ReloadingIndicator/ReloadingBarProgress").GetComponent<RectTransform>();
 		shotSound = gameObject.GetComponent<AudioSource>();
+		reloadSound = transform.GetChild(1).GetComponent<AudioSource>();
 		
 	}
 	
@@ -102,6 +104,8 @@ public class Shotgun : MonoBehaviour {
 	
 	
 	IEnumerator ReloadWeapon() {
+		
+		reloadSound.Play(0);
 		
 		for(int i = 0; i < 100; i++) {
 			

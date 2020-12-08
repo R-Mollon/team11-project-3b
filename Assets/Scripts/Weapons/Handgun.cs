@@ -15,10 +15,11 @@ public class Handgun : MonoBehaviour {
 	
 	private bool isReloading;
 	private int maxBullets = 8;
-	private float reloadTime = 2.0f;
+	private float reloadTime = 1.0f;
 	
 	private RectTransform reloadProgress;
 	private AudioSource shotSound;
+	private AudioSource reloadSound;
 	
 	void Start() {
 		
@@ -26,6 +27,7 @@ public class Handgun : MonoBehaviour {
 		player = GameObject.Find("Player").GetComponent<Player>();
 		reloadProgress = GameObject.Find("HUD/WeaponData/ReloadingIndicator/ReloadingBarProgress").GetComponent<RectTransform>();
 		shotSound = gameObject.GetComponent<AudioSource>();
+		reloadSound = transform.GetChild(1).GetComponent<AudioSource>();
 		
 	}
 	
@@ -97,6 +99,8 @@ public class Handgun : MonoBehaviour {
 	
 	
 	IEnumerator ReloadWeapon() {
+		
+		reloadSound.Play(0);
 		
 		for(int i = 0; i < 100; i++) {
 			
