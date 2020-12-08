@@ -257,8 +257,8 @@ public class Player : MonoBehaviour {
 				break;
 			case 4:
 				weapon = Instantiate(Resources.Load("Prefabs/Sword")) as GameObject;
-				position = new Vector3(0.93f, -1.17f, 1.57f);
-				rotation = Quaternion.Euler(0, -30, 0);
+				position = new Vector3(0.4f, -0.4f, 0.5f);
+				rotation = Quaternion.Euler(20, 90, 0);
 				break;
 		}
 		

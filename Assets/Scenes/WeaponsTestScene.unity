@@ -159,9 +159,10 @@ MonoBehaviour:
   handgunBullets: 80
   automaticMagazine: 30
   automaticBullets: 90
-  shotgunLoaded: 2
+  shotgunLoaded: 6
   shotgunShells: 20
   reloading: 0
+  firing: 0
 --- !u!54 &68541457
 Rigidbody:
   m_ObjectHideFlags: 0

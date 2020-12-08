@@ -46,11 +46,11 @@ public class Sword : MonoBehaviour {
 			
 			if(i < 40) {
 				
-				transform.Rotate(20.0f / i, -5.0f / i, 0);
+				transform.Rotate(0, -1f, 1.75f);
 				
 			} else if(i > 40) {
 				
-				transform.Rotate(-20.0f / (i - 40), 5.0f /  (i - 40), 0);
+				transform.Rotate(0, 1f, -1.75f);
 				
 			}
 			
@@ -58,7 +58,7 @@ public class Sword : MonoBehaviour {
 			
 		}
 		
-		transform.localRotation = Quaternion.Euler(0, -30, 0);
+		transform.localRotation = Quaternion.Euler(20, 90, 0);
 		
 		ready = true;
 		yield return null;
