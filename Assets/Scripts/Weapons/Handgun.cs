@@ -22,6 +22,7 @@ public class Handgun : MonoBehaviour {
 	private AudioSource dryShotSound;
 	private AudioSource reloadSound;
 	
+	private Transform magazine;
 	private Transform slider;
 	
 	void Start() {
@@ -30,13 +31,15 @@ public class Handgun : MonoBehaviour {
 		player = GameObject.Find("Player").GetComponent<Player>();
 		reloadProgress = GameObject.Find("HUD/WeaponData/ReloadingIndicator/ReloadingBarProgress").GetComponent<RectTransform>();
 		shotSound = gameObject.GetComponent<AudioSource>();
-		dryShotSound = transform.GetChild(5).GetComponent<AudioSource>();
-		reloadSound = transform.GetChild(1).GetComponent<AudioSource>();
 		
-		slider = transform.GetChild(3).transform;
+		reloadSound = transform.GetChild(0).GetComponent<AudioSource>();
+		dryShotSound = transform.GetChild(1).GetComponent<AudioSource>();
+		
+		magazine = transform.GetChild(3).transform;
+		slider = transform.GetChild(4).transform;
 		
 		if(player.handgunMagazine == 0)
-			slider.localPosition = new Vector3(slider.localPosition.x, slider.localPosition.y, 0.01252308f);
+			slider.localPosition = new Vector3(slider.localPosition.x, slider.localPosition.y, -0.1212297f);
 		
 	}
 	
@@ -95,16 +98,16 @@ public class Handgun : MonoBehaviour {
 			
 			if(i < 5) {
 				// Rotate weapon upwards
-				transform.Rotate(-3f, 0, 0);
+				transform.Rotate(3f, 0, 0);
 				
-				slider.Translate(0, 0, -0.007f);
+				slider.Translate(0, 0, 0.007f);
 			} else {
 				// Rotate back downwards
-				transform.Rotate(3f, 0, 0);
+				transform.Rotate(-3f, 0, 0);
 				
 				// If out of ammo, don't translate the slider back
 				if(player.handgunMagazine > 0)
-					slider.Translate(0, 0, 0.007f);
+					slider.Translate(0, 0, -0.007f);
 			}
 			
 			yield return new WaitForSecondsRealtime(0.02f);
@@ -126,9 +129,35 @@ public class Handgun : MonoBehaviour {
 			reloadProgress.sizeDelta = new Vector2(i * 2, 10);
 			reloadProgress.localPosition = new Vector3(i - 50, 0, 0);
 			
+			
+			// Reload animation
+			if(i < 10) {
+				// Tilt gun
+				transform.Rotate(3.0f, 0, 3.0f);
+			} else if(i < 20) {
+				// Remove magazine
+				magazine.Translate(0, -0.055f, 0.007f);
+			} else if(i > 29 && i < 40) {
+				// Insert magazine
+				magazine.Translate(0, 0.055f, -0.007f);
+			} else if(i > 40){
+				// Tilt gun back
+				transform.Rotate(-3.0f, 0, -3.0f);
+			}
+			
+			
 			yield return new WaitForSecondsRealtime(reloadTime / 50.0f);
 			
 		}
+		
+		// Reset rotation
+		transform.localRotation = Quaternion.Euler(0, 180f, 0);
+		magazine.localRotation = Quaternion.Euler(-20.68f, 0, 0);
+		
+		// Reset magazine position
+		magazine.localPosition = new Vector3(0, -0.05186473f, 0.04769017f);
+		
+		
 		
 		isReloading = false;
 		player.reloading = false;
@@ -143,8 +172,8 @@ public class Handgun : MonoBehaviour {
 			player.handgunBullets = 0;
 		}
 		
-		// Move slider back to starting position
-		slider.localPosition = new Vector3(slider.localPosition.x, slider.localPosition.y, 0.03002306f);
+		// Reset slider back to starting position
+		slider.localPosition = new Vector3(slider.localPosition.x, slider.localPosition.y, -0.1387274f);
 		
 	}
 	

@@ -241,8 +241,8 @@ public class Player : MonoBehaviour {
 			case 1:
 			default:
 				weapon = Instantiate(Resources.Load("Prefabs/Handgun")) as GameObject;
-				position = new Vector3(0.4f, -0.34f, 0.45f);
-				rotation = Quaternion.Euler(0, 0, 0);
+				position = new Vector3(0.3f, -0.1f, 0.5f);
+				rotation = Quaternion.Euler(0, 180, 0);
 				break;
 			case 2:
 				weapon = Instantiate(Resources.Load("Prefabs/AutomaticGun")) as GameObject;
