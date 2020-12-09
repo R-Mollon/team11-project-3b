@@ -8,6 +8,8 @@ public class Bullet : MonoBehaviour {
 	
 	public float damage;
 	
+	private bool hasDamaged;
+	
 	void Update() {
 		
 		lifetime += Time.deltaTime;
@@ -21,7 +23,9 @@ public class Bullet : MonoBehaviour {
 		
 		var enemy = collider.GetComponent<Enemy>();
 		
-		if (enemy != null) {
+		if (enemy != null && !hasDamaged) {
+			hasDamaged = true;
+			
 			enemy.TakeDamage(damage);
 			
 			Destroy(this.gameObject);

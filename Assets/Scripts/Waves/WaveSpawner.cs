@@ -26,6 +26,7 @@ public class WaveSpawner : MonoBehaviour {
 		// Get enemy script and set health to given health
 		Enemy enemyScript = enemy.GetComponent<Enemy>();
 		enemyScript._health = health;
+		enemyScript._currentHealth = health;
 	}
    
    
