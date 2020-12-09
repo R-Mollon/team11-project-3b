@@ -8,7 +8,7 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField] GameObject _hitPrefab;
     [SerializeField] GameObject _explosionPrefab;
-    [SerializeField] float _health = 20.0f;
+    public float _health = 20.0f;
 	
 	private bool dead;
 	
