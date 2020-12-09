@@ -16,7 +16,8 @@ public class Player : MonoBehaviour {
 	public static bool paused;
 	
 	public int credits;
-
+	public float health;
+	public float maxHealth;
 
 	
 	/* Ingame weapon data */
@@ -45,6 +46,9 @@ public class Player : MonoBehaviour {
 	private CanvasGroup UIoutOfAmmoIndicator;
 	/**/
 	
+	private Text UInumCredits;
+	private Text UInumCreditsBG;
+	
 	private PersistantData playerData;
 	private float movementScale;
 	
@@ -60,6 +64,9 @@ public class Player : MonoBehaviour {
 		UIreloadingIndicator = GameObject.Find("HUD/WeaponData/ReloadingIndicator").GetComponent<CanvasGroup>();
 		UIoutOfAmmoIndicator = GameObject.Find("HUD/WeaponData/OutOfAmmoIndicator").GetComponent<CanvasGroup>();
 		
+		UInumCredits = GameObject.Find("HUD/CreditsData/NumCredits").GetComponent<Text>();
+		UInumCreditsBG = GameObject.Find("HUD/CreditsData/NumCreditsBG").GetComponent<Text>();
+		
 		// Lock cursor
 		Cursor.lockState = CursorLockMode.Locked;
 		paused = false;
@@ -74,6 +81,9 @@ public class Player : MonoBehaviour {
 		}
 		
 		playerSpeed *= movementScale;
+		
+		maxHealth = 30.0f;
+		health = maxHealth;
 		
 	}
 	
@@ -143,7 +153,9 @@ public class Player : MonoBehaviour {
 			handleWeapons();
 		}
 		
-		
+		// Update number of credits
+		UInumCredits.text = "§" + credits.ToString();
+		UInumCreditsBG.text = "§" + credits.ToString();
 	
 	}
 	
