@@ -132,13 +132,46 @@ public class Player : MonoBehaviour {
 			newVelocity.y += 5;
 		}
 
-        if (!paused)
+		// Teleport camera to position of player body
+		mainCamera.transform.position = transform.position + transform.up;
+
+		// Render weapon data
+		Vector2 numBullets;
+
+		switch (equippedWeapon)
+		{
+			case 1:
+			default:
+				UIweaponName.text = "Handgun";
+				numBullets = new Vector2(handgunMagazine, handgunBullets);
+				break;
+			case 2:
+				UIweaponName.text = "M4";
+				numBullets = new Vector2(automaticMagazine, automaticBullets);
+				break;
+			case 3:
+				UIweaponName.text = "Shotgun";
+				numBullets = new Vector2(shotgunLoaded, shotgunShells);
+				break;
+			case 4:
+				UIweaponName.text = "Sword";
+				numBullets = new Vector2(0, 0);
+				break;
+		}
+
+		if (equippedWeapon < 4)
+		{
+			UIweaponShots.text = numBullets.x + "/" + numBullets.y;
+		}
+		else
+		{
+			UIweaponShots.text = "";
+		}
+
+		if (!paused)
         {
 			// Set velocity of player body to new velocity
 			playerBody.velocity = newVelocity;
-
-			// Teleport camera to position of player body
-			mainCamera.transform.position = transform.position + transform.up;
 
 			// Add mouse x and y positions to rotation values
 			xRotation += Input.GetAxis("Mouse X");
@@ -217,35 +250,6 @@ public class Player : MonoBehaviour {
 		
 		if(!reloading) {
 			UIreloadingIndicator.alpha = 0;
-		}
-	
-		// Render weapon data
-		Vector2 numBullets;
-		
-		switch(equippedWeapon) {
-			case 1:
-			default:
-				UIweaponName.text = "Handgun";
-				numBullets = new Vector2(handgunMagazine, handgunBullets);
-				break;
-			case 2:
-				UIweaponName.text = "M4";
-				numBullets = new Vector2(automaticMagazine, automaticBullets);
-				break;
-			case 3:
-				UIweaponName.text = "Shotgun";
-				numBullets = new Vector2(shotgunLoaded, shotgunShells);
-				break;
-			case 4:
-				UIweaponName.text = "Sword";
-				numBullets = new Vector2(0, 0);
-				break;
-		}
-		
-		if(equippedWeapon < 4) {
-			UIweaponShots.text = numBullets.x + "/" + numBullets.y;
-		} else {
-			UIweaponShots.text = "";
 		}
 		
 		// Render if current weapon needs to be reloaded
