@@ -43,6 +43,9 @@ public class Player : MonoBehaviour {
 	private CanvasGroup UIoutOfAmmoIndicator;
 	/**/
 	
+	private PersistantData playerData;
+	private float movementScale;
+	
 	
 	void Start() {
 		
@@ -58,6 +61,17 @@ public class Player : MonoBehaviour {
 		// Lock cursor
 		Cursor.lockState = CursorLockMode.Locked;
 		paused = false;
+		
+		
+		movementScale = 1.0f;
+		GameObject playerDataObject = GameObject.Find("PersistantData");
+		if(playerDataObject != null) {
+			playerData = playerDataObject.GetComponent<PersistantData>();
+			
+			movementScale = playerData.moveSpeed;
+		}
+		
+		playerSpeed *= movementScale;
 		
 	}
 	
