@@ -9,10 +9,12 @@ public class Shop : MonoBehaviour
     public Canvas shopUI;
     public bool atShop;
     public GameObject player;
+    public Player playerData;
 
     // Start is called before the first frame update
     void Start()
     {
+        playerData = GameObject.Find("Player").GetComponent<Player>();
         shopUI.enabled = false;
     }
 
@@ -36,27 +38,36 @@ public class Shop : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
     }
 
-    /*public void buyAutomaticAmmo()
+    public void buyAutomaticAmmo()
     {
-        if(Player.automaticBullets != 90)
+        if(playerData.automaticBullets != 90)
         {
-            Player.credits -= 5;
-            Player.automaticBullets = 90;
+            if(playerData.credits >= 5)
+            {
+                playerData.credits -= 5;
+                playerData.automaticBullets = 90;
+            }
         }
     }
     public void buyShotgunAmmo()
     {
-        if(Player.shotgunShells != 20)
+        if(playerData.shotgunShells != 20)
         {
-            Player.credits -= 5;
-            Player.shotgunShells = 20;
+            if (playerData.credits >= 5)
+            {
+                playerData.credits -= 5;
+                playerData.shotgunShells = 20;
+            }
         }
     }
     public void buyHandgunAmmo()
     {
-        Player.credits -= 5;
-        Player.handgunBullets = 80;
-    }*/
+        if (playerData.credits >= 5)
+        {
+            playerData.credits -= 5;
+            playerData.handgunBullets = 80;
+        }
+    }
 
     void checkShop()
     {
