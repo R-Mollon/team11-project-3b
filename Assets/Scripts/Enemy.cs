@@ -6,9 +6,12 @@ using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
+
     [SerializeField] GameObject _hitPrefab;
     [SerializeField] GameObject _explosionPrefab;
     [SerializeField] float _health = 20.0f;
+
+	[SerializeField] float _damage = 10.0f;
 	
 	private bool dead;
 	
@@ -16,6 +19,15 @@ public class Enemy : MonoBehaviour
 	private float numCredits;
 
     float _currentHealth;
+
+	private Animator _animator;
+	private bool _distanceCheck = false;
+	private float _attackTime = 0.1f;
+
+	void Start()
+    {
+		_animator = GetComponent<Animator>();
+    }
 
     void OnEnable()
     {
@@ -36,6 +48,38 @@ public class Enemy : MonoBehaviour
     {
         var player = FindObjectOfType<Player>();
         GetComponent<NavMeshAgent>().SetDestination(player.transform.position);
+
+		float distance = Vector3.Distance(player.transform.position, this.transform.position);
+		if (distance < 5.0f)
+        {
+			if (!_distanceCheck)
+            {
+				_distanceCheck = true;
+            } else
+            {
+				_attackTime -= Time.deltaTime;
+            }
+			if (_attackTime <= 0.0f)
+            {
+				//Attack
+				_animator.SetBool("Attack", true);
+            }
+
+        } else
+        {
+			_animator.SetBool("Attack", false);
+			_distanceCheck = false;
+			_attackTime = 1.0f;
+        }
+
+		
+    }
+
+	// Animation event
+	public void AttackEnd()
+    {
+		// send damage to the player
+		//PlayerController.Instance.OnHit(this.gameObject, 35);
     }
 	
 	
@@ -55,4 +99,16 @@ public class Enemy : MonoBehaviour
         }
             
     }
+	void OnCollisionEnter(Collision collision)
+	{
+
+		var player = collision.collider.GetComponent<Player>();
+		if (player != null)
+		{
+			player.takeDamage(_damage);
+
+		}
+	}
+
+
 }
