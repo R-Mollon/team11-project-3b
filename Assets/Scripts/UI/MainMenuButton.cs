@@ -30,7 +30,7 @@ public class MainMenuButton : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 	
 	public void OnPointerExit(PointerEventData eventData) {
 		StopCoroutine("Glow");
-		thisText.color = new Color(50.0f / 255, 50.0f / 255, 50.0f / 255);
+		thisText.color = new Color(215.0f / 255, 215.0f / 255, 215.0f / 255);
 	}
 	
 	
