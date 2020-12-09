@@ -9,8 +9,6 @@ public class Enemy : MonoBehaviour
 
     [SerializeField] GameObject _hitPrefab;
     [SerializeField] GameObject _explosionPrefab;
-
-    [SerializeField] float _health = 20.0f;
     public float _health = 20.0f;
 
 	
@@ -19,7 +17,7 @@ public class Enemy : MonoBehaviour
 	private PersistantData playerData;
 	private float numCredits;
 
-    float _currentHealth;
+    public float _currentHealth;
 
 	private Animator _animator;
 	private bool _distanceCheck = false;
