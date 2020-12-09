@@ -9,12 +9,15 @@ public class Enemy : MonoBehaviour
     [SerializeField] GameObject _hitPrefab;
     [SerializeField] GameObject _explosionPrefab;
     [SerializeField] float _health = 20.0f;
+	
+	private bool dead;
 
     float _currentHealth;
 
     void OnEnable()
     {
         _currentHealth = _health;
+		dead = false;
     }
 
 
@@ -30,10 +33,13 @@ public class Enemy : MonoBehaviour
         _currentHealth -= damage;
         //Instantiate(_hitPrefab, transform.position, transform.rotation);
 
-        if (_currentHealth <= 0.0f)
-        {
+        if (_currentHealth <= 0.0f && !dead) {
+			
+			dead = true;
+			GameObject.Find("Player").GetComponent<Player>().credits++;
             Instantiate(_explosionPrefab, transform.position, transform.rotation);
-            gameObject.SetActive(false);
+            Destroy(this.gameObject);
+			
         }
             
     }
