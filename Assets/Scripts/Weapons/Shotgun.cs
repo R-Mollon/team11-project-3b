@@ -27,6 +27,9 @@ public class Shotgun : MonoBehaviour {
 	private PersistantData playerData;
 	private float reloadScale;
 	
+	private float damage;
+	private float damageScale;
+	
 	void Start() {
 		
 		mainCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
@@ -39,12 +42,16 @@ public class Shotgun : MonoBehaviour {
 		pump = transform.GetChild(2).transform;
 		trigger = transform.GetChild(3).transform;
 		
+		damage = 2.0f;
+		
 		reloadScale = 1.0f;
+		damageScale = 1.0f;
 		GameObject playerDataObject = GameObject.Find("PersistantData");
 		if(playerDataObject != null) {
 			playerData = playerDataObject.GetComponent<PersistantData>();
 			
 			reloadScale = playerData.shotgunReload;
+			damageScale = playerData.shotgunDamage;
 		}
 		
 	}
@@ -90,6 +97,9 @@ public class Shotgun : MonoBehaviour {
 			// Create bullet using the bullet prefab
 			GameObject bullet = Instantiate(Resources.Load("Prefabs/Bullet")) as GameObject;
 			bullet.transform.parent = GameObject.Find("Bullets").transform;
+			
+			// Set damage value of bullet
+			bullet.GetComponent<Bullet>().damage = damage * damageScale;
 			
 			// Move bullet to camera position and rotation
 			bullet.transform.position = mainCamera.transform.position;

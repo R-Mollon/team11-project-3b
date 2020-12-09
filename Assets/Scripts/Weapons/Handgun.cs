@@ -28,6 +28,9 @@ public class Handgun : MonoBehaviour {
 	private PersistantData playerData;
 	private float reloadScale;
 	
+	private float damage;
+	private float damageScale;
+	
 	void Start() {
 		
 		mainCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
@@ -44,13 +47,16 @@ public class Handgun : MonoBehaviour {
 		if(player.handgunMagazine == 0)
 			slider.localPosition = new Vector3(slider.localPosition.x, slider.localPosition.y, -0.1212297f);
 		
+		damage = 4.0f;
 		
 		reloadScale = 1.0f;
+		damageScale = 1.0f;
 		GameObject playerDataObject = GameObject.Find("PersistantData");
 		if(playerDataObject != null) {
 			playerData = playerDataObject.GetComponent<PersistantData>();
 			
 			reloadScale = playerData.handgunReload;
+			damageScale = playerData.handgunDamage;
 		}
 		
 	}
@@ -94,6 +100,9 @@ public class Handgun : MonoBehaviour {
 		// Create a bullet using the bullet prefab
 		GameObject bullet = Instantiate(Resources.Load("Prefabs/Bullet")) as GameObject;
 		bullet.transform.parent = GameObject.Find("Bullets").transform;
+		
+		// Set damage value of bullet
+		bullet.GetComponent<Bullet>().damage = damage * damageScale;
 		
 		// Move bullet to camera position and rotation
 		bullet.transform.position = mainCamera.transform.position;

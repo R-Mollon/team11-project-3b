@@ -6,6 +6,8 @@ public class Bullet : MonoBehaviour {
 	
 	private float lifetime = 0.0f;
 	
+	public float damage;
+	
 	void Update() {
 		
 		lifetime += Time.deltaTime;
@@ -20,10 +22,16 @@ public class Bullet : MonoBehaviour {
 		//Destroy(gameObject);
 	 
 	}
-   void OnCollisionEnter(Collision collision)
-    {
+	
+    void OnCollisionEnter(Collision collision) {
+		
 		var enemy = collision.collider.GetComponent<Enemy>();
-		if (enemy != null)
-			enemy.TakeDamage();
+		
+		if (enemy != null) {
+			enemy.TakeDamage(damage);
+			
+			Destroy(this.gameObject);
+		}
+		
     }
 }

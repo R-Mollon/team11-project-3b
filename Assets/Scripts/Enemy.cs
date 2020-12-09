@@ -8,9 +8,9 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField] GameObject _hitPrefab;
     [SerializeField] GameObject _explosionPrefab;
-    [SerializeField] int _health = 3;
+    [SerializeField] float _health = 20.0f;
 
-    int _currentHealth;
+    float _currentHealth;
 
     void OnEnable()
     {
@@ -23,12 +23,14 @@ public class Enemy : MonoBehaviour
         var player = FindObjectOfType<Player>();
         GetComponent<NavMeshAgent>().SetDestination(player.transform.position);
     }
-    public void TakeDamage()
-    {
-        _currentHealth--;
+	
+	
+    public void TakeDamage(float damage) {
+		
+        _currentHealth -= damage;
         //Instantiate(_hitPrefab, transform.position, transform.rotation);
 
-        if (_currentHealth <= 0)
+        if (_currentHealth <= 0.0f)
         {
             Instantiate(_explosionPrefab, transform.position, transform.rotation);
             gameObject.SetActive(false);
