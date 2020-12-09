@@ -31,6 +31,8 @@ public class Bullet : MonoBehaviour {
 			enemy.TakeDamage(damage);
 			
 			Destroy(this.gameObject);
+		} else if(collision.collider.GetComponent<Player>() == null && collision.collider.GetComponent<Bullet>() == null) {
+			Destroy(this.gameObject);
 		}
 		
     }
