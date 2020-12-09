@@ -11,6 +11,9 @@ public class Enemy : MonoBehaviour
     [SerializeField] float _health = 20.0f;
 	
 	private bool dead;
+	
+	private PersistantData playerData;
+	private float numCredits;
 
     float _currentHealth;
 
@@ -18,6 +21,14 @@ public class Enemy : MonoBehaviour
     {
         _currentHealth = _health;
 		dead = false;
+		
+		numCredits = 1.0f;
+		GameObject playerDataObject = GameObject.Find("PersistantData");
+		if(playerDataObject != null) {
+			playerData = playerDataObject.GetComponent<PersistantData>();
+			
+			numCredits = playerData.creditsMult;
+		}
     }
 
 
@@ -36,9 +47,10 @@ public class Enemy : MonoBehaviour
         if (_currentHealth <= 0.0f && !dead) {
 			
 			dead = true;
-			GameObject.Find("Player").GetComponent<Player>().credits++;
             Instantiate(_explosionPrefab, transform.position, transform.rotation);
             Destroy(this.gameObject);
+			
+			GameObject.Find("Player").GetComponent<Player>().creditsDecimal += numCredits;
 			
         }
             

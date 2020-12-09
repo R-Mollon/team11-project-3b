@@ -16,6 +16,8 @@ public class Player : MonoBehaviour {
 	public static bool paused;
 	
 	public int credits;
+	public float creditsDecimal;
+	
 	public float health;
 	public float maxHealth;
 	
@@ -164,6 +166,12 @@ public class Player : MonoBehaviour {
 		// Update health bar
 		UIhealthBar.rectTransform.sizeDelta = new Vector2(health * 10.0f, 25);
 		UIhealthBar.rectTransform.localPosition = new Vector3((30.0f - health) * -5.0f, -190, 0);
+	
+		// Convert decimal credits to credits
+		if(creditsDecimal >= 1.0f) {
+			creditsDecimal -= 1.0f;
+			credits++;
+		}
 	
 	}
 	
