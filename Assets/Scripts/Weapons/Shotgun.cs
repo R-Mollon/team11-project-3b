@@ -24,6 +24,9 @@ public class Shotgun : MonoBehaviour {
 	private Transform pump;
 	private Transform trigger;
 	
+	private PersistantData playerData;
+	private float reloadScale;
+	
 	void Start() {
 		
 		mainCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
@@ -35,6 +38,14 @@ public class Shotgun : MonoBehaviour {
 		
 		pump = transform.GetChild(2).transform;
 		trigger = transform.GetChild(3).transform;
+		
+		reloadScale = 1.0f;
+		GameObject playerDataObject = GameObject.Find("PersistantData");
+		if(playerDataObject != null) {
+			playerData = playerDataObject.GetComponent<PersistantData>();
+			
+			reloadScale = playerData.shotgunReload;
+		}
 		
 	}
 	
@@ -136,6 +147,7 @@ public class Shotgun : MonoBehaviour {
 	
 	IEnumerator ReloadWeapon() {
 		
+		reloadSound.pitch = reloadScale;
 		reloadSound.Play(0);
 		
 		for(int i = 0; i < 100; i++) {
@@ -149,7 +161,7 @@ public class Shotgun : MonoBehaviour {
 				transform.Rotate(-2f, 0, -2f);
 			}
 			
-			yield return new WaitForSeconds(reloadTime / 100.0f);
+			yield return new WaitForSeconds(reloadTime / (100.0f * reloadScale));
 			
 		}
 		
