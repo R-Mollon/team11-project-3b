@@ -14,6 +14,8 @@ public class Player : MonoBehaviour {
 	public float playerSpeed = 5.0f;
 
 	public static bool paused;
+	
+	public int credits;
 
 
 	
