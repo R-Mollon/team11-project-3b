@@ -12,7 +12,7 @@ public class Enemy : MonoBehaviour
     public float _health = 20.0f;
 
 	
-	private bool dead;
+	public bool dead;
 	
 	private PersistantData playerData;
 	private float numCredits;
@@ -22,6 +22,8 @@ public class Enemy : MonoBehaviour
 	private Animator _animator;
 	private bool _distanceCheck = false;
 	private float _attackTime = 0.1f;
+
+	float _damage = 10.0f;
 
 	void Start()
     {
