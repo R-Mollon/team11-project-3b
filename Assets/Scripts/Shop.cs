@@ -62,10 +62,13 @@ public class Shop : MonoBehaviour
     }
     public void buyHandgunAmmo()
     {
-        if (playerData.credits >= 5)
+        if (playerData.handgunBullets != 80)
         {
-            playerData.credits -= 5;
-            playerData.handgunBullets = 80;
+            if (playerData.credits >= 5)
+            {
+                playerData.credits -= 5;
+                playerData.handgunBullets = 80;
+            }
         }
     }
 
