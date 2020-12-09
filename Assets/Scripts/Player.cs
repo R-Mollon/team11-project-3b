@@ -18,6 +18,8 @@ public class Player : MonoBehaviour {
 	public int credits;
 	public float health;
 	public float maxHealth;
+	
+	private Image UIhealthBar;
 
 	
 	/* Ingame weapon data */
@@ -66,6 +68,8 @@ public class Player : MonoBehaviour {
 		
 		UInumCredits = GameObject.Find("HUD/CreditsData/NumCredits").GetComponent<Text>();
 		UInumCreditsBG = GameObject.Find("HUD/CreditsData/NumCreditsBG").GetComponent<Text>();
+		
+		UIhealthBar = GameObject.Find("HUD/Health/HealthBar").GetComponent<Image>();
 		
 		// Lock cursor
 		Cursor.lockState = CursorLockMode.Locked;
@@ -156,6 +160,10 @@ public class Player : MonoBehaviour {
 		// Update number of credits
 		UInumCredits.text = "§" + credits.ToString();
 		UInumCreditsBG.text = "§" + credits.ToString();
+		
+		// Update health bar
+		UIhealthBar.rectTransform.sizeDelta = new Vector2(health * 10.0f, 25);
+		UIhealthBar.rectTransform.localPosition = new Vector3((30.0f - health) * -5.0f, -190, 0);
 	
 	}
 	
