@@ -13,11 +13,15 @@ public class Sword : MonoBehaviour {
 	
 	private AudioSource swingSound;
 	
+	private float damage;
+	
 	void Start() {
 		
 		mainCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
 		player = GameObject.Find("Player").GetComponent<Player>();
 		swingSound = gameObject.GetComponent<AudioSource>();
+		
+		damage = 8.0f;
 		
 	}
 	
@@ -64,6 +68,16 @@ public class Sword : MonoBehaviour {
 		yield return null;
 		
 	}
+	
+	void OnTriggerEnter(Collider collider) {
+		
+		var enemy = collider.GetComponent<Enemy>();
+		
+		if (enemy != null) {
+			enemy.TakeDamage(damage);
+		}
+		
+    }
 	
 }
 
