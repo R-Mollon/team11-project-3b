@@ -16,22 +16,16 @@ public class Bullet : MonoBehaviour {
 			Destroy(gameObject);
 		
 	}
-   
-	void OnTriggerEnter(Collider other) {
-	 
-		//Destroy(gameObject);
-	 
-	}
 	
-    void OnCollisionEnter(Collision collision) {
+    void OnTriggerEnter(Collider collider) {
 		
-		var enemy = collision.collider.GetComponent<Enemy>();
+		var enemy = collider.GetComponent<Enemy>();
 		
 		if (enemy != null) {
 			enemy.TakeDamage(damage);
 			
 			Destroy(this.gameObject);
-		} else if(collision.collider.GetComponent<Player>() == null && collision.collider.GetComponent<Bullet>() == null) {
+		} else if(collider.GetComponent<Player>() == null && collider.GetComponent<Bullet>() == null) {
 			Destroy(this.gameObject);
 		}
 		
