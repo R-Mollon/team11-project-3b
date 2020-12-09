@@ -20,6 +20,7 @@ public class Player : MonoBehaviour {
 	
 	public float health;
 	public float maxHealth;
+	private bool takenDamage;
 	
 	private Image UIhealthBar;
 
@@ -90,6 +91,8 @@ public class Player : MonoBehaviour {
 		
 		maxHealth = 30.0f;
 		health = maxHealth;
+		
+		StartCoroutine("PlayerHeal");
 		
 	}
 	
@@ -331,6 +334,7 @@ public class Player : MonoBehaviour {
 	public void takeDamage(float damage)
     {
 		health -= damage;
+		takenDamage = true;
 
 		if (health <= 0.0f)
 		{
@@ -339,6 +343,31 @@ public class Player : MonoBehaviour {
 
 		}
 	}
+	
+	IEnumerator PlayerHeal() {
+		
+		while(true) {
+			
+			if(takenDamage) {
+				takenDamage = false;
+				yield return new WaitForSecondsRealtime(1.5f);
+			}
+			
+			while(health < maxHealth && !takenDamage) {
+				health += 0.1f;
+				
+				if(health > maxHealth)
+					health = maxHealth;
+				
+				yield return new WaitForSecondsRealtime(0.01f);
+			}
+			
+			yield return new WaitForSecondsRealtime(0.1f);
+			
+		}
+		
+	}
+	
 }
 
 
