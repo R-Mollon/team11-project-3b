@@ -7,7 +7,6 @@ public class Shop : MonoBehaviour
 {
     public Canvas shopUI;
 
-
     // Start is called before the first frame update
     void Start()
     {
