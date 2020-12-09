@@ -512,7 +512,7 @@ GameObject:
   - component: {fileID: 1282699722528495573}
   - component: {fileID: 1282699722528495572}
   m_Layer: 0
-  m_Name: Skeleton@Skin
+  m_Name: Skeleton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -577,7 +577,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 1282699723162631505}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
+  m_Radius: 0.1
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
