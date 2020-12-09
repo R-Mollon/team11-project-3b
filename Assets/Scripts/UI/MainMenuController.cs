@@ -7,6 +7,7 @@ public class MainMenuController : MonoBehaviour {
 	private Camera mainCamera;
 	
 	private int position;
+	private int vertPosition;
 	private float panTarget;
 	
 	void Start() {
@@ -14,6 +15,7 @@ public class MainMenuController : MonoBehaviour {
 		mainCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
 		
 		position = 0;
+		vertPosition = 0;
 		
 	}
 	
@@ -25,7 +27,7 @@ public class MainMenuController : MonoBehaviour {
 		
 		// Pan 10 units to the left
 		panTarget = -10.0f;
-		StartCoroutine("smoothPan");
+		StartCoroutine("smoothPanLR");
 	}
 	
 	public void panRight() {
@@ -36,13 +38,47 @@ public class MainMenuController : MonoBehaviour {
 		
 		// Pan 10 units to the left
 		panTarget = 10.0f;
-		StartCoroutine("smoothPan");
+		StartCoroutine("smoothPanLR");
 	}
 	
-	IEnumerator smoothPan() {
+	IEnumerator smoothPanLR() {
 		
 		for(int i = 0; i < 100; i++) {
 			mainCamera.transform.Translate(panTarget / 100, 0, 0);
+			
+			yield return new WaitForSecondsRealtime(0.0008f);
+		}
+		
+		yield return null;
+		
+	}
+	
+	public void panUp() {
+		if(vertPosition >= 1)
+			return;
+		
+		vertPosition++;
+		
+		// Pan 10 units upward
+		panTarget = 10.0f;
+		StartCoroutine("smoothPanUD");
+	}
+	
+	public void panDown() {
+		if(vertPosition <= 0)
+			return;
+		
+		vertPosition--;
+		
+		// Pan 10 units downward
+		panTarget = -10.0f;
+		StartCoroutine("smoothPanUD");
+	}
+	
+	IEnumerator smoothPanUD() {
+		
+		for(int i = 0; i < 100; i++) {
+			mainCamera.transform.Translate(0, panTarget / 100, 0);
 			
 			yield return new WaitForSecondsRealtime(0.0008f);
 		}

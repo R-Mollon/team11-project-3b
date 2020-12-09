@@ -37,21 +37,9 @@ public class UpgradesHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 		upgradeCostText = GameObject.Find("Upgrades/UpgradesHover/Info/Cost").GetComponent<Text>();
 	}
 	
-	
-	void Update() {
-		if(pointerInside) {
-			hoverTransform.localPosition = new Vector3((Input.mousePosition.x / 225) - 12.2f, (Input.mousePosition.y / 225) + 52.3f, -19.3f);
-			
-			if(hoverTransform.localPosition.x > -9.8)
-				hoverTransform.localPosition = new Vector3((Input.mousePosition.x / 225) - 13.2f, (Input.mousePosition.y / 225) + 52.3f, -19.3f);
-		}
-	}
-	
-	
 	public void OnPointerEnter(PointerEventData eventData) {
 		thisBackground.color = new Color(1f, 1f, 1f, 0.25f);
 		hoverBox.alpha = 1;
-		pointerInside = true;
 		
 		
 		// Get details for upgrade to show in hover box
@@ -169,8 +157,6 @@ public class UpgradesHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 	public void OnPointerExit(PointerEventData eventData) {
 		thisBackground.color = new Color(1f, 1f, 1f, 0.0f);
 		hoverBox.alpha = 0;
-		pointerInside = false;
-		hoverTransform.localPosition = new Vector3(1000.0f, 1000.0f, 30.0f);
 	}
 	
 }
