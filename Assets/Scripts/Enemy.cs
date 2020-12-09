@@ -26,7 +26,7 @@ public class Enemy : MonoBehaviour
     public void TakeDamage()
     {
         _currentHealth--;
-        Instantiate(_hitPrefab, transform.position, transform.rotation);
+        //Instantiate(_hitPrefab, transform.position, transform.rotation);
 
         if (_currentHealth <= 0)
         {

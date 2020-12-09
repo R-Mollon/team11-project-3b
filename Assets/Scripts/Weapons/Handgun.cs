@@ -25,6 +25,9 @@ public class Handgun : MonoBehaviour {
 	private Transform magazine;
 	private Transform slider;
 	
+	private PersistantData playerData;
+	private float reloadScale;
+	
 	void Start() {
 		
 		mainCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
@@ -40,6 +43,15 @@ public class Handgun : MonoBehaviour {
 		
 		if(player.handgunMagazine == 0)
 			slider.localPosition = new Vector3(slider.localPosition.x, slider.localPosition.y, -0.1212297f);
+		
+		
+		reloadScale = 1.0f;
+		GameObject playerDataObject = GameObject.Find("PersistantData");
+		if(playerDataObject != null) {
+			playerData = playerDataObject.GetComponent<PersistantData>();
+			
+			reloadScale = playerData.handgunReload;
+		}
 		
 	}
 	
@@ -129,6 +141,7 @@ public class Handgun : MonoBehaviour {
 	
 	IEnumerator ReloadWeapon() {
 		
+		reloadSound.pitch = reloadScale;
 		reloadSound.Play(0);
 		
 		for(int i = 0; i < 50; i++) {
@@ -153,7 +166,7 @@ public class Handgun : MonoBehaviour {
 			}
 			
 			
-			yield return new WaitForSecondsRealtime(reloadTime / 50.0f);
+			yield return new WaitForSecondsRealtime(reloadTime / (50.0f * reloadScale));
 			
 		}
 		

@@ -1405,7 +1405,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _hitPrefab: {fileID: 1099910560033363664, guid: 57a71c65f771e4f41878763b5ee03cff,
     type: 3}
-  _explosionPrefab: {fileID: 5188872984447376182, guid: 848e19326a3e611488c952f5ba97c0cb,
+  _explosionPrefab: {fileID: 1099910560033363664, guid: 57a71c65f771e4f41878763b5ee03cff,
     type: 3}
   _health: 3
 --- !u!136 &898804796

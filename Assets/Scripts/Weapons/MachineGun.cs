@@ -25,6 +25,9 @@ public class MachineGun : MonoBehaviour {
 	private Transform magazine;
 	private Transform trigger;
 	
+	private PersistantData playerData;
+	private float reloadScale;
+	
 	void Start() {
 		
 		mainCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
@@ -37,6 +40,15 @@ public class MachineGun : MonoBehaviour {
 		bolt = transform.GetChild(2).transform;
 		magazine = transform.GetChild(3).transform;
 		trigger = transform.GetChild(6).transform;
+		
+		
+		reloadScale = 1.0f;
+		GameObject playerDataObject = GameObject.Find("PersistantData");
+		if(playerDataObject != null) {
+			playerData = playerDataObject.GetComponent<PersistantData>();
+			
+			reloadScale = playerData.automaticReload;
+		}
 		
 	}
 	
@@ -132,6 +144,7 @@ public class MachineGun : MonoBehaviour {
 	
 	IEnumerator ReloadWeapon() {
 		
+		reloadSound.pitch = reloadScale;
 		reloadSound.Play(0);
 		
 		for(int i = 0; i < 50; i++) {
@@ -154,7 +167,7 @@ public class MachineGun : MonoBehaviour {
 				transform.Rotate(-5.0f, 0, -5.0f);
 			}
 			
-			yield return new WaitForSecondsRealtime(reloadTime / 50.0f);
+			yield return new WaitForSecondsRealtime(reloadTime / (50.0f * reloadScale));
 			
 		}
 		
