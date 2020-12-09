@@ -5,7 +5,10 @@ using UnityEngine.UI;
 
 public class Shop : MonoBehaviour
 {
+    public Camera cam;
     public Canvas shopUI;
+    public bool atShop;
+    public GameObject player;
 
     // Start is called before the first frame update
     void Start()
@@ -16,25 +19,19 @@ public class Shop : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.B))
-        {
-            if (shopUI.enabled == false)
-            {
-                openShop();
-            }
-        }
+        checkShop();
     }
 
     void openShop()
     {
-        Time.timeScale = 0;
+        Player.paused = true;
         Cursor.lockState = CursorLockMode.Confined;
         shopUI.enabled = true;
     }
 
     public void closeShop()
     {
-        Time.timeScale = 1;
+        Player.paused = false;
         shopUI.enabled = false;
         Cursor.lockState = CursorLockMode.Locked;
     }
@@ -52,6 +49,23 @@ public class Shop : MonoBehaviour
         Player.hasSword = true;
     }
 
+    void checkShop()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, 2f))
+        {
+            if (hit.collider.tag == "Shop")
+            {
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    if (shopUI.enabled == false)
+                    {
+                        openShop();
+                    }
+                }
+            }
+        }
+    }
 
 
 }
