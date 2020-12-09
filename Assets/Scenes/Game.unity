@@ -1456,12 +1456,12 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 419131078}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: ade91557865129c47919cf0d193abd7e, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.171555, y: 1.8353502, z: 1.0465038}
-  m_Center: {x: -0.020634614, y: 0.9176751, z: 0.03060465}
+  m_Size: {x: 1.171555, y: 5.813138, z: 1.0465009}
+  m_Center: {x: -0.020634614, y: 2.906569, z: 0.03060465}
 --- !u!1 &436044894
 GameObject:
   m_ObjectHideFlags: 0
@@ -3449,7 +3449,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1182317622}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: ade91557865129c47919cf0d193abd7e, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
@@ -6186,7 +6186,7 @@ TerrainCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2121758677}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: ade91557865129c47919cf0d193abd7e, type: 2}
   m_Enabled: 1
   m_TerrainData: {fileID: 15600000, guid: a8a427e4558acf042813272bd4603110, type: 2}
   m_EnableTreeColliders: 1
