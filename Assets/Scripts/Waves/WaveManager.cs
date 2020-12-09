@@ -49,7 +49,7 @@ public class WaveManager : MonoBehaviour {
 				
 				enemiesInWave = waveNum + 4;
 				
-				enemyHealth = Mathf.Sqrt(waveNum) * 10.0f;
+				enemyHealth = (Mathf.Sqrt(waveNum) * 2.5f) + 10.0f;
 				
 				StartCoroutine("doWaveText");
 				
