@@ -63,12 +63,12 @@ public class Handgun : MonoBehaviour {
 	
 	void Update() {
 
-		if(Input.GetMouseButtonDown(0) && player.handgunMagazine == 0 && !player.reloading && !dryShotSound.isPlaying) {
+		if(Input.GetMouseButtonDown(0) && player.handgunMagazine == 0 && !player.reloading && !dryShotSound.isPlaying && !Player.paused) {
 			dryShotSound.Play(0);
 		}
 
 		// Check for usage
-		if(Input.GetMouseButtonDown(0) && ready && player.handgunMagazine > 0 && !player.reloading) {
+		if(Input.GetMouseButtonDown(0) && ready && player.handgunMagazine > 0 && !player.reloading && !Player.paused) {
 			
 			// Subtract 1 bullet from magazine
 			player.handgunMagazine--;

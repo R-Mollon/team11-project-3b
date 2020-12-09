@@ -24,7 +24,7 @@ public class Sword : MonoBehaviour {
 	void Update() {
 		
 		// Check for usage
-		if(Input.GetMouseButtonDown(0) && ready) {
+		if(Input.GetMouseButtonDown(0) && ready && !Player.paused) {
 			
 			// Disallow weapon from being used again
 			ready = false;

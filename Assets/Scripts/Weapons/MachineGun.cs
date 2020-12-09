@@ -60,12 +60,12 @@ public class MachineGun : MonoBehaviour {
 	
 	void Update() {
 		
-		if(Input.GetMouseButton(0) && player.automaticMagazine == 0 && !player.reloading && !dryShotSound.isPlaying) {
+		if(Input.GetMouseButton(0) && player.automaticMagazine == 0 && !player.reloading && !dryShotSound.isPlaying && !Player.paused) {
 			dryShotSound.Play(0);
 		}
 		
 		// Check for usage
-		if(Input.GetMouseButton(0) && ready && player.automaticMagazine > 0 && !player.reloading) {
+		if(Input.GetMouseButton(0) && ready && player.automaticMagazine > 0 && !player.reloading && !Player.paused) {
 			
 			// Subtract 1 bullet from magazine
 			player.automaticMagazine--;
