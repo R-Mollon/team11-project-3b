@@ -12,8 +12,10 @@ public class Player : MonoBehaviour {
 	private float yRotation;
 	
 	public float playerSpeed = 5.0f;
-	
-	
+
+	public static bool paused;
+
+
 	
 	/* Ingame weapon data */
 	public int handgunMagazine;
@@ -55,6 +57,7 @@ public class Player : MonoBehaviour {
 		
 		// Lock cursor
 		Cursor.lockState = CursorLockMode.Locked;
+		paused = false;
 		
 	}
 	
@@ -96,30 +99,33 @@ public class Player : MonoBehaviour {
 			// Jumping
 			newVelocity.y += 5;
 		}
-		
-		// Set velocity of player body to new velocity
-		playerBody.velocity = newVelocity;
-		
-		// Teleport camera to position of player body
-		mainCamera.transform.position = transform.position + transform.up;
-		
-		// Add mouse x and y positions to rotation values
-		xRotation += Input.GetAxis("Mouse X");
-		yRotation += Input.GetAxis("Mouse Y");
-		
-		// Ensure x rotation stays in [-360, 360] but DON'T prevent rotation beyond
-		if(Mathf.Abs(xRotation) > 360)
-			xRotation = 0;
-		
-		// Ensure y rotation stays in [-90, 90] and prevent rotation beyond
-		yRotation = Mathf.Clamp(yRotation, -90, 90);
-		
-		// Rotate camera to proper angle
-		mainCamera.transform.eulerAngles = new Vector3(-yRotation, xRotation, 0);
-		
-		
-		// Handle weapons
-		handleWeapons();
+
+        if (!paused)
+        {
+			// Set velocity of player body to new velocity
+			playerBody.velocity = newVelocity;
+
+			// Teleport camera to position of player body
+			mainCamera.transform.position = transform.position + transform.up;
+
+			// Add mouse x and y positions to rotation values
+			xRotation += Input.GetAxis("Mouse X");
+			yRotation += Input.GetAxis("Mouse Y");
+
+			// Ensure x rotation stays in [-360, 360] but DON'T prevent rotation beyond
+			if (Mathf.Abs(xRotation) > 360)
+				xRotation = 0;
+
+			// Ensure y rotation stays in [-90, 90] and prevent rotation beyond
+			yRotation = Mathf.Clamp(yRotation, -90, 90);
+
+			// Rotate camera to proper angle
+			mainCamera.transform.eulerAngles = new Vector3(-yRotation, xRotation, 0);
+
+
+			// Handle weapons
+			handleWeapons();
+		}
 		
 		
 	
@@ -131,7 +137,7 @@ public class Player : MonoBehaviour {
 	private void handleWeapons() {
 		
 		// Check for weapon changes
-		if(!reloading && !firing) {
+		if(!reloading && !firing && !paused) {
 			if(Input.GetKey(KeyCode.Alpha1) && hasHandgun) {
 				equippedWeapon = 1;
 				switchWeapon();
@@ -148,7 +154,7 @@ public class Player : MonoBehaviour {
 		}
 		
 		// Check for reload
-		if(Input.GetKey(KeyCode.R) && !reloading && !firing) {
+		if(Input.GetKey(KeyCode.R) && !reloading && !firing && !paused) {
 			
 			// Check current weapon is not full ammo
 			if(
