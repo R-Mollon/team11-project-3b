@@ -9,9 +9,10 @@ public class Enemy : MonoBehaviour
 
     [SerializeField] GameObject _hitPrefab;
     [SerializeField] GameObject _explosionPrefab;
-    [SerializeField] float _health = 20.0f;
 
-	[SerializeField] float _damage = 10.0f;
+    [SerializeField] float _health = 20.0f;
+    public float _health = 20.0f;
+
 	
 	private bool dead;
 	

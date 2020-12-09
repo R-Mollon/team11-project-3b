@@ -4309,7 +4309,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: "The main objective is to survive as long as you can! Defeat waves of enemies
     until you eventually fall.\n\nDefeating enemies will give you credits (\xA7)
-    that can be used to purchase new weapons and ammunition to help you survive longer.\n\nAfter
+    that can be used to purchase more ammunition to help you survive longer.\n\nAfter
     the game, use leftover credits to purchase permanent upgrades to help you in
     future games."
 --- !u!222 &400053670
