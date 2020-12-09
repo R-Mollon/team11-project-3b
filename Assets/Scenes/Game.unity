@@ -508,6 +508,50 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!1 &65095092
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 65095094}
+  - component: {fileID: 65095093}
+  m_Layer: 0
+  m_Name: Ceiling
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &65095093
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 65095092}
+  m_Material: {fileID: 13400000, guid: 1eb2b7dd75987934cb13e9237d6f061f, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 200, y: 1, z: 200}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &65095094
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 65095092}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 100, y: 7, z: 100}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &70027805
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1456,12 +1500,12 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 419131078}
-  m_Material: {fileID: 13400000, guid: ade91557865129c47919cf0d193abd7e, type: 2}
+  m_Material: {fileID: 13400000, guid: 1eb2b7dd75987934cb13e9237d6f061f, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.171555, y: 5.813138, z: 1.0465009}
-  m_Center: {x: -0.020634614, y: 2.906569, z: 0.03060465}
+  m_Size: {x: 1.171555, y: 40, z: 1.0465009}
+  m_Center: {x: -0.020634614, y: 18, z: 0.03060465}
 --- !u!1 &436044894
 GameObject:
   m_ObjectHideFlags: 0
@@ -3449,7 +3493,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1182317622}
-  m_Material: {fileID: 13400000, guid: ade91557865129c47919cf0d193abd7e, type: 2}
+  m_Material: {fileID: 13400000, guid: 1eb2b7dd75987934cb13e9237d6f061f, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
