@@ -36,21 +36,27 @@ public class Shop : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
     }
 
-    public void buyAutomaticAmmo()
+    /*public void buyAutomaticAmmo()
     {
-        Player.credits -= 5;
-        Player.automaticBullets = 90;
+        if(Player.automaticBullets != 90)
+        {
+            Player.credits -= 5;
+            Player.automaticBullets = 90;
+        }
     }
     public void buyShotgunAmmo()
     {
-        Player.credits -= 5;
-        Player.shotgunShells = 20;
+        if(Player.shotgunShells != 20)
+        {
+            Player.credits -= 5;
+            Player.shotgunShells = 20;
+        }
     }
     public void buyHandgunAmmo()
     {
         Player.credits -= 5;
         Player.handgunBullets = 80;
-    }
+    }*/
 
     void checkShop()
     {
