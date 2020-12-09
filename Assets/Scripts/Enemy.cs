@@ -21,7 +21,7 @@ public class Enemy : MonoBehaviour
 
 	private Animator _animator;
 	private bool _distanceCheck = false;
-	private float _attackTime = 0.1f;
+	private float _attackTime = 1.0f;
 
 	float _damage = 10.0f;
 
@@ -100,7 +100,8 @@ public class Enemy : MonoBehaviour
         }
             
     }
-	void OnCollisionEnter(Collision collision)
+	void OnCollisionEnter(
+		Collision collision)
 	{
 
 		var player = collision.collider.GetComponent<Player>();
