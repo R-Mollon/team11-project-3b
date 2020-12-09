@@ -15,7 +15,7 @@ public class Player : MonoBehaviour {
 
 	public static bool paused;
 	
-	public int credits;
+	public static int credits;
 	public float health;
 	public float maxHealth;
 	
@@ -24,15 +24,15 @@ public class Player : MonoBehaviour {
 	
 	/* Ingame weapon data */
 	public int handgunMagazine;
-	public int handgunBullets;
+	public static int handgunBullets;
 	public static bool hasHandgun = true;
 	
 	public int automaticMagazine;
-	public int automaticBullets;
+	public static int automaticBullets;
 	public static bool hasAutomatic = true;
 
 	public int shotgunLoaded;
-	public int shotgunShells;
+	public static int shotgunShells;
 	public static bool hasShotgun = true;
 
 	public static bool hasSword = true;
