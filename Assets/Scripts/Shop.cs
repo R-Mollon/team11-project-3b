@@ -75,7 +75,7 @@ public class Shop : MonoBehaviour
     void checkShop()
     {
         RaycastHit hit;
-        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, 2f))
+        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, 5f))
         {
             if (hit.collider.tag == "Shop")
             {
