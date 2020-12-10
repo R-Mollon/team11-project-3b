@@ -5,9 +5,9 @@ public class Spawner : MonoBehaviour
 
     float _nextSpawnTime;
 
-    [SerializeField] float _delay = 2f;
-    [SerializeField] GameObject _prefab;
-    [SerializeField] Transform[] _spawnPoints;
+    public float _delay = 2f;
+    public GameObject _prefab;
+    public Transform[] _spawnPoints;
 
     void Update()
     {

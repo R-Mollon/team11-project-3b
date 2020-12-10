@@ -21,8 +21,8 @@ public class Enemy : MonoBehaviour
 	private Animator _animator;
 
 	//Cooldown time between attacks
-	private float _attackCooldownTime = 2.6f;
-	private float _attackCooldownTimeMain = 2.0f;
+	private float _attackCooldownTime = 1.3f;
+	private float _attackCooldownTimeMain = 1.3f;
 	private PersistantData data;
 	private Player player;
     
@@ -81,13 +81,16 @@ public class Enemy : MonoBehaviour
 			
         }else if (!dead)
 		{
+			GetComponent<NavMeshAgent>().SetDestination(transform.position);
 			_animator.SetBool("Attack", true);
+
 			if (_attackCooldownTime > 0)
             {
 				_attackCooldownTime -= Time.deltaTime;
 
 			} else
             {
+				
 				_attackCooldownTime = _attackCooldownTimeMain;
 				AttackTarget();
 				 
