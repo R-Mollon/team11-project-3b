@@ -30,6 +30,11 @@ public class Enemy : MonoBehaviour
     
 	// Enemy Damage Ammount
 	float _damage = 10.0f;
+	
+	private AudioSource hitSound;
+	
+	private Rigidbody enemyBody;
+	private Rigidbody playerBody;
 
 	void Start()
     {
@@ -51,6 +56,11 @@ public class Enemy : MonoBehaviour
 		
 		data = GameObject.Find("PersistantData").GetComponent<PersistantData>();
 		player = GameObject.Find("Player").GetComponent<Player>();
+		
+		enemyBody = gameObject.GetComponent<Rigidbody>();
+		playerBody = GameObject.Find("Player").GetComponent<Rigidbody>();
+		
+		hitSound = gameObject.GetComponent<AudioSource>();
     }
 
 
@@ -86,6 +96,10 @@ public class Enemy : MonoBehaviour
 		
         _currentHealth -= damage;
         //Instantiate(_hitPrefab, transform.position, transform.rotation);
+		
+		float distance = Vector3.Distance(enemyBody.position, playerBody.position);
+		
+		hitSound.PlayOneShot(hitSound.clip, 1.0f - (distance / 30));
 
         if (_currentHealth <= 0.0f && !dead) {
 			
