@@ -10,6 +10,8 @@ public class Shop : MonoBehaviour
     public bool atShop;
     public Rigidbody player;
     public Player playerData;
+	
+	public AudioSource buySound;
 
     // Start is called before the first frame update
     void Start()
@@ -55,6 +57,8 @@ public class Shop : MonoBehaviour
         {
             if(playerData.credits >= 6)
             {
+				buySound.Play(0);
+				
                 playerData.credits -= 6;
                 playerData.automaticBullets = 90;
             }
@@ -66,6 +70,8 @@ public class Shop : MonoBehaviour
         {
             if (playerData.credits >= 7)
             {
+				buySound.Play(0);
+				
                 playerData.credits -= 7;
                 playerData.shotgunShells = 20;
             }
@@ -77,6 +83,8 @@ public class Shop : MonoBehaviour
         {
             if (playerData.credits >= 5)
             {
+				buySound.Play(0);
+				
                 playerData.credits -= 5;
                 playerData.handgunBullets = 80;
             }
@@ -90,6 +98,8 @@ public class Shop : MonoBehaviour
         {
             if (hit.collider.tag == "Shop")
             {
+				buySound = hit.collider.gameObject.GetComponent<AudioSource>();
+				
                 if (Input.GetKeyDown(KeyCode.E) && !playerData.reloading)
                 {
                     if (shopUI.enabled == false)
