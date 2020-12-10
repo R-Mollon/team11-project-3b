@@ -608,9 +608,7 @@ public class Player : MonoBehaviour {
 	
 	
 	void OnTriggerStay(Collider other) {
-		
-		Debug.Log("Trigger enter");
-		
+
 		if(other.gameObject.tag == "EnemySword") {
 			takeDamage(10.0f);
 		}
