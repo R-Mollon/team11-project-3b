@@ -44,9 +44,9 @@ public class PersistantData : MonoBehaviour
 	
 	/* Challenge List */
 	public Challenge[] challenges = new[] {
-		new Challenge() { description = "Kill 20 enemies with the handgun", reward = 20, type = 1},
-		new Challenge() { description = "Kill 40 enemies with the handgun", reward = 40, type = 1},
-		new Challenge() { description = "Kill 60 enemies with the handgun", reward = 60, type = 1},
+		new Challenge() { description = "Kill 20 enemies with the Handgun", reward = 20, type = 1},
+		new Challenge() { description = "Kill 40 enemies with the Handgun", reward = 40, type = 1},
+		new Challenge() { description = "Kill 60 enemies with the Handgun", reward = 60, type = 1},
 		
 		new Challenge() { description = "Kill 20 enemies with the M4", reward = 10, type = 2},
 		new Challenge() { description = "Kill 40 enemies with the M4", reward = 20, type = 2},
@@ -71,16 +71,19 @@ public class PersistantData : MonoBehaviour
 		
 		switch(challenge) {
 			case 1:
-				while(challenges[currentChallengeOne].type == challenges[currentChallengeTwo].type || challenges[currentChallengeOne].type == challenges[currentChallengeThree].type)
-					currentChallengeOne   = (int) Math.Floor(UnityEngine.Random.value * challenges.Length);
+				do
+					currentChallengeOne = (int) Math.Floor(UnityEngine.Random.value * challenges.Length);
+				while(challenges[currentChallengeOne].type == challenges[currentChallengeTwo].type || challenges[currentChallengeOne].type == challenges[currentChallengeThree].type);
 				break;
 			case 2:
-				while(challenges[currentChallengeTwo].type == challenges[currentChallengeThree].type || challenges[currentChallengeTwo].type == challenges[currentChallengeThree].type)
-					currentChallengeTwo   = (int) Math.Floor(UnityEngine.Random.value * challenges.Length);
+				do
+					currentChallengeTwo = (int) Math.Floor(UnityEngine.Random.value * challenges.Length);
+				while(challenges[currentChallengeTwo].type == challenges[currentChallengeOne].type || challenges[currentChallengeTwo].type == challenges[currentChallengeThree].type);
 				break;
 			case 3:
-				while(challenges[currentChallengeThree].type == challenges[currentChallengeTwo].type || challenges[currentChallengeThree].type == challenges[currentChallengeTwo].type)
+				do
 					currentChallengeThree = (int) Math.Floor(UnityEngine.Random.value * challenges.Length);
+				while(challenges[currentChallengeThree].type == challenges[currentChallengeOne].type || challenges[currentChallengeThree].type == challenges[currentChallengeTwo].type);
 				break;
 		}
 		
@@ -130,12 +133,12 @@ public class PersistantData : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
     }
 	
-	public class Challenge {
-		public string description;
-		public int reward;
-		public int type;
-	}
-	
+}
+
+public class Challenge {
+	public string description;
+	public int reward;
+	public int type;
 }
 
 

@@ -78,6 +78,9 @@ public class Player : MonoBehaviour {
 	private AudioSource dingSound;
 	/**/
 	
+	private Text UIchallengeText;
+	private int completedChallenge;
+	
 	
 	void Start() {
 		
@@ -108,6 +111,8 @@ public class Player : MonoBehaviour {
 		UIdeathGameCreditsText = GameObject.Find("DeathHUD/DeathBackground/GameCredits/Overall").GetComponent<Text>();
 		UIdeathNewCreditsText = GameObject.Find("DeathHUD/DeathBackground/NewCredits/Overall").GetComponent<Text>();
 		
+		UIchallengeText = GameObject.Find("HUD/Challenges/ChallengeText").GetComponent<Text>();
+		
 		dingSound = GameObject.Find("DeathHUD/DeathBackground/Ding Sound").GetComponent<AudioSource>();
 		
 		
@@ -128,6 +133,8 @@ public class Player : MonoBehaviour {
 		
 		maxHealth = 30.0f;
 		health = maxHealth;
+		
+		completedChallenge = -1;
 		
 		StartCoroutine("PlayerHeal");
 		
@@ -245,6 +252,8 @@ public class Player : MonoBehaviour {
 			creditsDecimal -= 1.0f;
 			credits++;
 		}
+		
+		handleChallenges();
 	
 	}
 	
@@ -367,6 +376,211 @@ public class Player : MonoBehaviour {
 		weapon.transform.localRotation = rotation;
 		
 	}
+	
+	
+	// Called once per update
+	// Separated to reduce clutter
+	public void handleChallenges() {
+		
+		// Check challenge 1
+		Challenge challOne = playerData.challenges[playerData.currentChallengeOne];
+		int challScore = 0;
+		
+		switch(challOne.type) {
+			case 1:
+				challScore = playerData.handgunKills;
+				break;
+			case 2:
+				challScore = playerData.automaticKills;
+				break;
+			case 3:
+				challScore = playerData.shotgunKills;
+				break;
+			case 4:
+				challScore = playerData.swordKills;
+				break;
+			case 5:
+				challScore = playerData.airKills;
+				break;
+		}
+		
+		if(challScore >= (playerData.currentChallengeOne % 3) * 20 + 20) {
+			UIchallengeText.text = "Challenge Completed:\n" + challOne.description + "\n\nReward: §" + challOne.reward.ToString();
+			credits += challOne.reward;
+			
+			// Reset score
+			switch(challOne.type) {
+				case 1:
+					playerData.handgunKills = 0;
+					break;
+				case 2:
+					playerData.automaticKills = 0;
+					break;
+				case 3:
+					playerData.shotgunKills = 0;
+					break;
+				case 4:
+					playerData.swordKills = 0;
+					break;
+				case 5:
+					playerData.airKills = 0;
+					break;
+			}
+			
+			completedChallenge = 1;
+			StartCoroutine("CompleteChallenge");
+			
+		}
+		
+		
+		// Check challenge 2
+		Challenge challTwo = playerData.challenges[playerData.currentChallengeTwo];
+		challScore = 0;
+		
+		switch(challTwo.type) {
+			case 1:
+				challScore = playerData.handgunKills;
+				break;
+			case 2:
+				challScore = playerData.automaticKills;
+				break;
+			case 3:
+				challScore = playerData.shotgunKills;
+				break;
+			case 4:
+				challScore = playerData.swordKills;
+				break;
+			case 5:
+				challScore = playerData.airKills;
+				break;
+		}
+		
+		if(challScore >= (playerData.currentChallengeTwo % 3) * 20 + 20) {
+			UIchallengeText.text = "Challenge Completed:\n" + challTwo.description + "\n\nReward: §" + challTwo.reward.ToString();
+			credits += challTwo.reward;
+			
+			// Reset score
+			switch(challTwo.type) {
+				case 1:
+					playerData.handgunKills = 0;
+					break;
+				case 2:
+					playerData.automaticKills = 0;
+					break;
+				case 3:
+					playerData.shotgunKills = 0;
+					break;
+				case 4:
+					playerData.swordKills = 0;
+					break;
+				case 5:
+					playerData.airKills = 0;
+					break;
+			}
+			
+			completedChallenge = 2;
+			StartCoroutine("CompleteChallenge");
+			
+		}
+		
+		
+		// Check challenge 3
+		Challenge challThree = playerData.challenges[playerData.currentChallengeThree];
+		challScore = 0;
+		
+		switch(challThree.type) {
+			case 1:
+				challScore = playerData.handgunKills;
+				break;
+			case 2:
+				challScore = playerData.automaticKills;
+				break;
+			case 3:
+				challScore = playerData.shotgunKills;
+				break;
+			case 4:
+				challScore = playerData.swordKills;
+				break;
+			case 5:
+				challScore = playerData.airKills;
+				break;
+		}
+		
+		if(challScore >= (playerData.currentChallengeThree % 3) * 20 + 20) {
+			UIchallengeText.text = "Challenge Completed:\n" + challThree.description + "\n\nReward: §" + challThree.reward.ToString();
+			credits += challThree.reward;
+			
+			// Reset score
+			switch(challThree.type) {
+				case 1:
+					playerData.handgunKills = 0;
+					break;
+				case 2:
+					playerData.automaticKills = 0;
+					break;
+				case 3:
+					playerData.shotgunKills = 0;
+					break;
+				case 4:
+					playerData.swordKills = 0;
+					break;
+				case 5:
+					playerData.airKills = 0;
+					break;
+			}
+			
+			completedChallenge = 3;
+			StartCoroutine("CompleteChallenge");
+			
+		}
+		
+		
+	}
+	
+	
+	IEnumerator CompleteChallenge() {
+		
+		for(int i = 0; i < 200; i++) {
+			
+			if(i <= 25) {
+				UIchallengeText.color = new Color(0, 0, 0, (i) / 25.0f);
+			} else if(i > 80) {
+				UIchallengeText.color = new Color(0, 0, 0, 0);
+			}
+			
+			if(i == 90) {
+				playerData.rollChallenge(completedChallenge);
+				
+				switch(completedChallenge) {
+					case 1:
+						UIchallengeText.text = "New Challenge:\n" + playerData.challenges[playerData.currentChallengeOne].description;
+						break;
+					case 2:
+						UIchallengeText.text = "New Challenge:\n" + playerData.challenges[playerData.currentChallengeTwo].description;
+						break;
+					case 3:
+						UIchallengeText.text = "New Challenge:\n" + playerData.challenges[playerData.currentChallengeThree].description;
+						break;
+				}
+				
+				
+			}
+			
+			if(i > 100 && i < 155) {
+				UIchallengeText.color = new Color(0, 0, 0, 1);
+			} else if(i >= 155 && i < 180) {
+				UIchallengeText.color = new Color(0, 0, 0, (180 - i) / 25.0f);
+			}
+			
+			
+			yield return new WaitForSecondsRealtime(0.05f);
+		}
+		
+		UIchallengeText.color = new Color(0, 0, 0, 0);
+		
+		yield return null;
+	}
+	
 	
 	public void takeDamage(float damage)
     {
