@@ -543,9 +543,9 @@ public class Player : MonoBehaviour {
 		for(int i = 0; i < 200; i++) {
 			
 			if(i <= 25) {
-				UIchallengeText.color = new Color(0, 0, 0, (i) / 25.0f);
+				UIchallengeText.color = new Color(1, 1, 1, (i) / 25.0f);
 			} else if(i > 80) {
-				UIchallengeText.color = new Color(0, 0, 0, 0);
+				UIchallengeText.color = new Color(1, 1, 1, 0);
 			}
 			
 			if(i == 90) {
@@ -567,9 +567,9 @@ public class Player : MonoBehaviour {
 			}
 			
 			if(i > 100 && i < 155) {
-				UIchallengeText.color = new Color(0, 0, 0, 1);
+				UIchallengeText.color = new Color(1, 1, 1, 1);
 			} else if(i >= 155 && i < 180) {
-				UIchallengeText.color = new Color(0, 0, 0, (180 - i) / 25.0f);
+				UIchallengeText.color = new Color(1, 1, 1, (180 - i) / 25.0f);
 			}
 			
 			
