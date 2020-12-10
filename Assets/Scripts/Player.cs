@@ -82,6 +82,7 @@ public class Player : MonoBehaviour {
 	private int completedChallenge;
 	
 	private AudioSource stepSound;
+	private AudioSource hurtSound;
 	
 	
 	void Start() {
@@ -117,6 +118,7 @@ public class Player : MonoBehaviour {
 		
 		dingSound = GameObject.Find("DeathHUD/DeathBackground/Ding Sound").GetComponent<AudioSource>();
 		stepSound = gameObject.GetComponent<AudioSource>();
+		hurtSound = GameObject.Find("Player/Hurt Sound").GetComponent<AudioSource>();
 		
 		
 		// Lock cursor
@@ -601,6 +603,12 @@ public class Player : MonoBehaviour {
 	
 	public void takeDamage(float damage)
     {
+		
+		if(takenDamage)
+			return;
+		
+		hurtSound.Play(0);
+		
 		health -= damage;
 		takenDamage = true;
 
