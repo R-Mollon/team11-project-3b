@@ -44,25 +44,25 @@ public class PersistantData : MonoBehaviour
 	
 	/* Challenge List */
 	public Challenge[] challenges = new[] {
-		new Challenge() { description = "Kill 20 enemies with the handgun", reward = 20},
-		new Challenge() { description = "Kill 40 enemies with the handgun", reward = 40},
-		new Challenge() { description = "Kill 60 enemies with the handgun", reward = 60},
+		new Challenge() { description = "Kill 20 enemies with the handgun", reward = 20, type = 1},
+		new Challenge() { description = "Kill 40 enemies with the handgun", reward = 40, type = 1},
+		new Challenge() { description = "Kill 60 enemies with the handgun", reward = 60, type = 1},
 		
-		new Challenge() { description = "Kill 20 enemies with the M4", reward = 10},
-		new Challenge() { description = "Kill 40 enemies with the M4", reward = 20},
-		new Challenge() { description = "Kill 60 enemies with the M4", reward = 30},
+		new Challenge() { description = "Kill 20 enemies with the M4", reward = 10, type = 2},
+		new Challenge() { description = "Kill 40 enemies with the M4", reward = 20, type = 2},
+		new Challenge() { description = "Kill 60 enemies with the M4", reward = 30, type = 2},
 		
-		new Challenge() { description = "Kill 20 enemies with the Shotgun", reward = 8},
-		new Challenge() { description = "Kill 40 enemies with the Shotgun", reward = 16},
-		new Challenge() { description = "Kill 60 enemies with the Shotgun", reward = 32},
+		new Challenge() { description = "Kill 20 enemies with the Shotgun", reward = 8, type = 3},
+		new Challenge() { description = "Kill 40 enemies with the Shotgun", reward = 16, type = 3},
+		new Challenge() { description = "Kill 60 enemies with the Shotgun", reward = 32, type = 3},
 		
-		new Challenge() { description = "Kill 20 enemies with the Sword", reward = 20},
-		new Challenge() { description = "Kill 40 enemies with the Sword", reward = 40},
-		new Challenge() { description = "Kill 60 enemies with the Sword", reward = 60},
+		new Challenge() { description = "Kill 20 enemies with the Sword", reward = 20, type = 4},
+		new Challenge() { description = "Kill 40 enemies with the Sword", reward = 40, type = 4},
+		new Challenge() { description = "Kill 60 enemies with the Sword", reward = 60, type = 4},
 		
-		new Challenge() { description = "Kill 20 enemies while airborne", reward = 30},
-		new Challenge() { description = "Kill 40 enemies while airborne", reward = 60},
-		new Challenge() { description = "Kill 60 enemies while airborne", reward = 80},
+		new Challenge() { description = "Kill 20 enemies while airborne", reward = 30, type = 5},
+		new Challenge() { description = "Kill 40 enemies while airborne", reward = 60, type = 5},
+		new Challenge() { description = "Kill 60 enemies while airborne", reward = 80, type = 5},
 	};
 	/* -------------- */
 	
@@ -71,15 +71,15 @@ public class PersistantData : MonoBehaviour
 		
 		switch(challenge) {
 			case 1:
-				while(currentChallengeOne == currentChallengeTwo || currentChallengeOne == currentChallengeThree)
+				while(challenges[currentChallengeOne].type == challenges[currentChallengeTwo].type || challenges[currentChallengeOne].type == challenges[currentChallengeThree].type)
 					currentChallengeOne   = (int) Math.Floor(UnityEngine.Random.value * challenges.Length);
 				break;
 			case 2:
-				while(currentChallengeTwo == currentChallengeOne || currentChallengeTwo == currentChallengeThree)
+				while(challenges[currentChallengeTwo].type == challenges[currentChallengeThree].type || challenges[currentChallengeTwo].type == challenges[currentChallengeThree].type)
 					currentChallengeTwo   = (int) Math.Floor(UnityEngine.Random.value * challenges.Length);
 				break;
 			case 3:
-				while(currentChallengeThree == currentChallengeOne || currentChallengeThree == currentChallengeTwo)
+				while(challenges[currentChallengeThree].type == challenges[currentChallengeTwo].type || challenges[currentChallengeThree].type == challenges[currentChallengeTwo].type)
 					currentChallengeThree = (int) Math.Floor(UnityEngine.Random.value * challenges.Length);
 				break;
 		}
@@ -133,6 +133,7 @@ public class PersistantData : MonoBehaviour
 	public class Challenge {
 		public string description;
 		public int reward;
+		public int type;
 	}
 	
 }
