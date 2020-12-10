@@ -605,9 +605,6 @@ public class Player : MonoBehaviour {
 	public void takeDamage(float damage)
     {
 		
-		if(takenDamage)
-			return;
-		
 		hurtSound.Play(0);
 		
 		health -= damage;
