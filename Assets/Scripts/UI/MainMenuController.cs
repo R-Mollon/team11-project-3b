@@ -211,6 +211,10 @@ public class MainMenuController : MonoBehaviour {
 		SceneManager.LoadScene(1);
 	}
 	
+	public void doCredits() {
+		SceneManager.LoadScene(2);
+	}
+	
 	public void quitGame(int ignoreLevel) {
 
 		#if UNITY_EDITOR
