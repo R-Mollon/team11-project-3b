@@ -7,26 +7,30 @@ using UnityEngine.SceneManagement;
 public class PauseMenu : MonoBehaviour
 {
     public Canvas pauseUI;
-
+    public Shop shopManager;
 
     // Start is called before the first frame update
     void Start()
     {
         pauseUI.enabled = false;
+        shopManager = GameObject.Find("ShopManager").GetComponent<Shop>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P))
+        if (!shopManager.atShop)
         {
-            if (pauseUI.enabled == false)
+            if (Input.GetKeyDown(KeyCode.Escape))
             {
-                openMenu();
-            }
-            else
-            {
-                closeMenu();
+                if (pauseUI.enabled == false)
+                {
+                    openMenu();
+                }
+                else
+                {
+                    closeMenu();
+                }
             }
         }
     }
