@@ -87,6 +87,38 @@ public class PersistantData : MonoBehaviour
 				break;
 		}
 		
+		// Reset data for new challenge
+		int challType = 0;
+		switch(challenge) {
+			case 1:
+				challType = challenges[currentChallengeOne].type;
+				break;
+			case 2:
+				challType = challenges[currentChallengeTwo].type;
+				break;
+			case 3:
+				challType = challenges[currentChallengeThree].type;
+				break;
+		}
+		
+		switch(challType) {
+			case 1:
+				handgunKills = 0;
+				break;
+			case 2:
+				automaticKills = 0;
+				break;
+			case 3:
+				shotgunKills = 0;
+				break;
+			case 4:
+				swordKills = 0;
+				break;
+			case 5:
+				airKills = 0;
+				break;
+		}
+		
 	}
 	
 	
