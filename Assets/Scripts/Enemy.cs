@@ -24,7 +24,7 @@ public class Enemy : MonoBehaviour
 	private Player player;
     
 	// Enemy Damage Ammount
-	float _damage = 10.0f;
+	//float _damage = 10.0f;
 	
 	private AudioSource hitSound;
 	
