@@ -6,23 +6,20 @@ using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
-
     public GameObject _hitPrefab;
     public GameObject _explosionPrefab;
     public float _health = 20.0f;
-
-	
 	public bool dead;
 
 	private PersistantData playerData;
 	private float numCredits;
 
     public float _currentHealth;
-	private Animator _animator;
+	public Animator _animator;
 
 	//Cooldown time between attacks
-	private float _attackCooldownTime = 1.3f;
-	private float _attackCooldownTimeMain = 1.3f;
+	private float _attackCooldownTime = -1.0f;
+	private float _attackCooldownTimeMain = 2.15f;
 	private PersistantData data;
 	private Player player;
     
@@ -38,6 +35,18 @@ public class Enemy : MonoBehaviour
     {
 		_animator = GetComponent<Animator>();
     }
+
+	void AttackTarget()
+	{	
+		var player1 = FindObjectOfType<Player>();
+		float distance = Vector3.Distance(player1.transform.position, this.transform.position);
+		
+		if (distance < 5)
+        {
+			player1.takeDamage(_damage);
+        }
+		
+	}
 
     void OnEnable()
     {
@@ -68,7 +77,7 @@ public class Enemy : MonoBehaviour
        var player1 = FindObjectOfType<Player>();
 		_animator.SetBool("Attack", false);
 		float distance = Vector3.Distance(player1.transform.position, this.transform.position);
-		if (distance > 4)
+		if (distance > 5)
         {
 			if (!dead)
             {
@@ -90,20 +99,13 @@ public class Enemy : MonoBehaviour
 
 			} else
             {
+				_attackCooldownTime = Mathf.Abs(_attackCooldownTime - _attackCooldownTimeMain);
 				
-				_attackCooldownTime = _attackCooldownTimeMain;
-				AttackTarget();
-				 
-			}
-			
+				StartCoroutine("Attack");
+			}	
 		}
     }
-	void AttackTarget()
-    {
-		var player1 = FindObjectOfType<Player>();
-		player1.takeDamage(_damage);
-	}
-
+	
     public void TakeDamage(float damage) {
 		
         _currentHealth -= damage;
@@ -151,5 +153,16 @@ public class Enemy : MonoBehaviour
         }
 		Instantiate(_explosionPrefab, transform.position, transform.rotation);
 		Destroy(this.gameObject);
+    }
+	
+	IEnumerator Attack()
+    {
+		//AttackTarget();
+		
+		for (int i = 0; i < 1; i++)
+        {
+			yield return new WaitForSecondsRealtime(0.0f);
+        }
+		AttackTarget();
     }
 }
