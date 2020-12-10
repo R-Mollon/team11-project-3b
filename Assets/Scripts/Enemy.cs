@@ -78,7 +78,7 @@ public class Enemy : MonoBehaviour
 		_animator.SetBool("Attack", false);
 		float distance = Vector3.Distance(player1.transform.position, this.transform.position);
 		
-		if(!dead && distance > 3) {
+		if(!dead && distance > 2) {
 			GetComponent<NavMeshAgent>().SetDestination(player1.transform.position);
 		} else {
 			GetComponent<NavMeshAgent>().SetDestination(transform.position);
