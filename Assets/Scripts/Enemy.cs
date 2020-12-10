@@ -68,7 +68,7 @@ public class Enemy : MonoBehaviour
        var player1 = FindObjectOfType<Player>();
 		_animator.SetBool("Attack", false);
 		float distance = Vector3.Distance(player1.transform.position, this.transform.position);
-		if (distance > 2)
+		if (distance > 4)
         {
 			GetComponent<NavMeshAgent>().SetDestination(player1.transform.position);
         }else
@@ -105,7 +105,9 @@ public class Enemy : MonoBehaviour
         if (_currentHealth <= 0.0f && !dead) {
 			
 			dead = true;
-            Instantiate(_explosionPrefab, transform.position, transform.rotation);
+			_animator.SetBool("Death", true);
+			Instantiate(_explosionPrefab, transform.position, transform.rotation);
+
             Destroy(this.gameObject);
 			
 			GameObject.Find("Player").GetComponent<Player>().creditsDecimal += numCredits;
