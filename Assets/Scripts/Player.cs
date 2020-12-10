@@ -74,6 +74,8 @@ public class Player : MonoBehaviour {
 	private int countedPersistantCredits;
 	private int countedGameCredits;
 	private int newCredits;
+	
+	private AudioSource dingSound;
 	/**/
 	
 	
@@ -105,6 +107,8 @@ public class Player : MonoBehaviour {
 		UIdeathPersistantCreditsText = GameObject.Find("DeathHUD/DeathBackground/PersistantCredits/Overall").GetComponent<Text>();
 		UIdeathGameCreditsText = GameObject.Find("DeathHUD/DeathBackground/GameCredits/Overall").GetComponent<Text>();
 		UIdeathNewCreditsText = GameObject.Find("DeathHUD/DeathBackground/NewCredits/Overall").GetComponent<Text>();
+		
+		dingSound = GameObject.Find("DeathHUD/DeathBackground/Ding Sound").GetComponent<AudioSource>();
 		
 		
 		// Lock cursor
@@ -449,6 +453,7 @@ public class Player : MonoBehaviour {
 					
 					countedPersistantCredits++;
 					UIdeathPersistantCreditsText.text = "§" + countedPersistantCredits.ToString();
+					dingSound.PlayOneShot(dingSound.clip, 0.4f);
 					
 					float countTime = Mathf.Min(1.0f / (playerData.credits - countedPersistantCredits), 0.00000001f);
 					
@@ -474,6 +479,7 @@ public class Player : MonoBehaviour {
 					
 					countedGameCredits++;
 					UIdeathGameCreditsText.text = "§" + countedGameCredits.ToString();
+					dingSound.PlayOneShot(dingSound.clip, 0.4f);
 					
 					float countTime = Mathf.Min(1.0f / (credits - countedGameCredits), 0.00000001f);
 					
