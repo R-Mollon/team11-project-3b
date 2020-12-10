@@ -13,6 +13,8 @@ public class Player : MonoBehaviour {
 	private float yRotation;
 	
 	public float playerSpeed = 5.0f;
+	
+	private bool damageCooldown;
 
 	public static bool paused;
 	public bool dead;
@@ -142,6 +144,8 @@ public class Player : MonoBehaviour {
 		health = maxHealth;
 		
 		completedChallenge = -1;
+		
+		damageCooldown = false;
 		
 		StartCoroutine("PlayerHeal");
 		StartCoroutine("WalkSound");
@@ -603,11 +607,25 @@ public class Player : MonoBehaviour {
 	}
 	
 	
+	void OnTriggerStay(Collider other) {
+		
+		Debug.Log("Trigger enter");
+		
+		if(other.gameObject.tag == "EnemySword") {
+			takeDamage(10.0f);
+		}
+		
+	}
+	
+	
 	public void takeDamage(float damage)
     {
 		
-		if(dead)
+		if(dead || damageCooldown)
 			return;
+		
+		damageCooldown = true;
+		StartCoroutine("DamageCooldown");
 		
 		hurtSound.Play(0);
 		
@@ -621,6 +639,17 @@ public class Player : MonoBehaviour {
 
 		}
 	}
+	
+	
+	IEnumerator DamageCooldown() {
+		
+		for(int i = 0; i < 1; i++)
+			yield return new WaitForSecondsRealtime(1.0f);
+		
+		damageCooldown = false;
+		
+	}
+	
 	
 	IEnumerator PlayerHeal() {
 		

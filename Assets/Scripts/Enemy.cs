@@ -43,7 +43,7 @@ public class Enemy : MonoBehaviour
 		
 		if (distance < 5)
         {
-			player1.takeDamage(_damage);
+			//player1.takeDamage(_damage);
         }
 		
 	}
@@ -77,20 +77,19 @@ public class Enemy : MonoBehaviour
        var player1 = FindObjectOfType<Player>();
 		_animator.SetBool("Attack", false);
 		float distance = Vector3.Distance(player1.transform.position, this.transform.position);
+		
+		if(!dead && distance > 3) {
+			GetComponent<NavMeshAgent>().SetDestination(player1.transform.position);
+		} else {
+			GetComponent<NavMeshAgent>().SetDestination(transform.position);
+		}
+		
 		if (distance > 5)
         {
-			if (!dead)
-            {
-				GetComponent<NavMeshAgent>().SetDestination(player1.transform.position);
-				_attackCooldownTime = _attackCooldownTimeMain;
-            } else
-            {
-				GetComponent<NavMeshAgent>().SetDestination(transform.position);
-			}
+			_attackCooldownTime = _attackCooldownTimeMain;
 			
         }else if (!dead)
 		{
-			GetComponent<NavMeshAgent>().SetDestination(transform.position);
 			_animator.SetBool("Attack", true);
 
 			if (_attackCooldownTime > 0)
