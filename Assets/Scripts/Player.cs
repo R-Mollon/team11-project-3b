@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour {
 	
@@ -23,6 +24,8 @@ public class Player : MonoBehaviour {
 	private bool takenDamage;
 	
 	private Image UIhealthBar;
+	
+	private CanvasGroup HUDCanvas;
 
 	
 	/* Ingame weapon data */
@@ -57,11 +60,29 @@ public class Player : MonoBehaviour {
 	private PersistantData playerData;
 	private float movementScale;
 	
+	/* Vars Relating to Death */
+	private CanvasGroup UIdeathBackground;
+	
+	private CanvasGroup UIdeathPersistantCredits;
+	private CanvasGroup UIdeathGameCredits;
+	private CanvasGroup UIdeathNewCredits;
+	
+	private Text UIdeathPersistantCreditsText;
+	private Text UIdeathGameCreditsText;
+	private Text UIdeathNewCreditsText;
+	
+	private int countedPersistantCredits;
+	private int countedGameCredits;
+	private int newCredits;
+	/**/
+	
 	
 	void Start() {
 		
 		playerBody = gameObject.GetComponent<Rigidbody>();
 		mainCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
+		
+		HUDCanvas = GameObject.Find("HUD").GetComponent<CanvasGroup>();
 		
 		UIweaponName = GameObject.Find("HUD/WeaponData/WeaponName").GetComponent<Text>();
 		UIweaponShots = GameObject.Find("HUD/WeaponData/WeaponShots").GetComponent<Text>();
@@ -73,6 +94,18 @@ public class Player : MonoBehaviour {
 		UInumCreditsBG = GameObject.Find("HUD/CreditsData/NumCreditsBG").GetComponent<Text>();
 		
 		UIhealthBar = GameObject.Find("HUD/Health/HealthBar").GetComponent<Image>();
+		
+		
+		UIdeathBackground = GameObject.Find("DeathHUD/DeathBackground").GetComponent<CanvasGroup>();
+		
+		UIdeathPersistantCredits = GameObject.Find("DeathHUD/DeathBackground/PersistantCredits").GetComponent<CanvasGroup>();
+		UIdeathGameCredits = GameObject.Find("DeathHUD/DeathBackground/GameCredits").GetComponent<CanvasGroup>();
+		UIdeathNewCredits = GameObject.Find("DeathHUD/DeathBackground/NewCredits").GetComponent<CanvasGroup>();
+		
+		UIdeathPersistantCreditsText = GameObject.Find("DeathHUD/DeathBackground/PersistantCredits/Overall").GetComponent<Text>();
+		UIdeathGameCreditsText = GameObject.Find("DeathHUD/DeathBackground/GameCredits/Overall").GetComponent<Text>();
+		UIdeathNewCreditsText = GameObject.Find("DeathHUD/DeathBackground/NewCredits/Overall").GetComponent<Text>();
+		
 		
 		// Lock cursor
 		Cursor.lockState = CursorLockMode.Locked;
@@ -339,7 +372,7 @@ public class Player : MonoBehaviour {
 		if (health <= 0.0f)
 		{
 			
-			//Load scene 0 
+			onDeath();
 
 		}
 	}
@@ -368,7 +401,124 @@ public class Player : MonoBehaviour {
 		
 	}
 	
+	
+	private void onDeath() {
+		
+		Time.timeScale = 0;
+		paused = true;
+		
+		countedPersistantCredits = 0;
+		countedGameCredits = 0;
+		newCredits = playerData.credits + credits;
+		HUDCanvas.alpha = 0;
+		Cursor.lockState = CursorLockMode.None;
+		StopAllCoroutines();
+		
+		UIdeathPersistantCredits.alpha = 0;
+		UIdeathGameCredits.alpha = 0;
+		UIdeathNewCredits.alpha = 0;
+		
+		StartCoroutine("Death");
+		
+	}
+	
+	IEnumerator Death() {
+		
+		for(int i = 0; i < 1000; i++) {
+			
+			// Fade screen in
+			if(i <= 20) {
+				UIdeathBackground.alpha = i / 20.0f;
+			}
+			
+			// Fade in overall credits
+			if(i >= 150 && i <= 160) {
+				UIdeathPersistantCredits.alpha = (i - 150) / 10.0f;
+			}
+			
+			if(i == 161) {
+				// Count overall credits
+				while(countedPersistantCredits < playerData.credits) {
+					
+					if(playerData.credits - countedPersistantCredits > 10000)
+						countedPersistantCredits += 1110;
+					else if(playerData.credits - countedPersistantCredits > 1000)
+						countedPersistantCredits += 110;
+					else if(playerData.credits - countedPersistantCredits > 100)
+						countedPersistantCredits += 11;
+					
+					countedPersistantCredits++;
+					UIdeathPersistantCreditsText.text = "§" + countedPersistantCredits.ToString();
+					
+					float countTime = Mathf.Min(1.0f / (playerData.credits - countedPersistantCredits), 0.00000001f);
+					
+					yield return new WaitForSecondsRealtime(countTime);
+				}
+			}
+			
+			// Fade in game credits
+			if(i >= 250 && i <= 260) {
+				UIdeathGameCredits.alpha = (i - 250) / 10.0f;
+			}
+			
+			if(i == 261) {
+				// Count game credits
+				while(countedGameCredits < credits) {
+					
+					if(credits - countedGameCredits > 10000)
+						countedGameCredits += 1110;
+					else if(credits - countedGameCredits > 1000)
+						countedGameCredits += 110;
+					else if(credits - countedGameCredits > 100)
+						countedGameCredits += 11;
+					
+					countedGameCredits++;
+					UIdeathGameCreditsText.text = "§" + countedGameCredits.ToString();
+					
+					float countTime = Mathf.Min(1.0f / (credits - countedGameCredits), 0.00000001f);
+					
+					yield return new WaitForSecondsRealtime(countTime);
+				}
+			}
+			
+			// Fade in new credits
+			if(i >= 350 && i <= 360) {
+				UIdeathNewCredits.alpha = (i - 350) / 10.0f;
+				
+				UIdeathNewCreditsText.text = "§" + newCredits.ToString();
+			}
+			
+			// Load back to main menu
+			if(i == 999) {
+				playerData.credits = newCredits;
+				Time.timeScale = 1;
+				SceneManager.LoadScene(0);
+			}
+			
+			
+			yield return new WaitForSecondsRealtime(0.001f);
+		}
+		
+		yield return null;
+		
+	}
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
