@@ -21,7 +21,7 @@ public class Enemy : MonoBehaviour
 	private Animator _animator;
 
 	//Cooldown time between attacks
-	private float _attackCooldownTime = 2.0f;
+	private float _attackCooldownTime = 2.6f;
 	private float _attackCooldownTimeMain = 2.0f;
 	private PersistantData data;
 	private Player player;
@@ -70,8 +70,16 @@ public class Enemy : MonoBehaviour
 		float distance = Vector3.Distance(player1.transform.position, this.transform.position);
 		if (distance > 4)
         {
-			GetComponent<NavMeshAgent>().SetDestination(player1.transform.position);
-        }else
+			if (!dead)
+            {
+				GetComponent<NavMeshAgent>().SetDestination(player1.transform.position);
+				_attackCooldownTime = _attackCooldownTimeMain;
+            } else
+            {
+				GetComponent<NavMeshAgent>().SetDestination(transform.position);
+			}
+			
+        }else if (!dead)
 		{
 			_animator.SetBool("Attack", true);
 			if (_attackCooldownTime > 0)
@@ -106,9 +114,9 @@ public class Enemy : MonoBehaviour
 			
 			dead = true;
 			_animator.SetBool("Death", true);
-			Instantiate(_explosionPrefab, transform.position, transform.rotation);
+			
 
-            Destroy(this.gameObject);
+			StartCoroutine("DeathAnimation");
 			
 			GameObject.Find("Player").GetComponent<Player>().creditsDecimal += numCredits;
 			
@@ -130,5 +138,14 @@ public class Enemy : MonoBehaviour
 			if(player.gameObject.GetComponent<Rigidbody>().velocity.y != 0.0f)
 				data.airKills++;	
         }       
+    }
+	IEnumerator DeathAnimation()
+    {
+		for(int i = 0; i < 1; i++)
+        {
+			yield return new WaitForSecondsRealtime(5.0f);
+        }
+		Instantiate(_explosionPrefab, transform.position, transform.rotation);
+		Destroy(this.gameObject);
     }
 }
