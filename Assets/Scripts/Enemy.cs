@@ -18,13 +18,11 @@ public class Enemy : MonoBehaviour
 	private float numCredits;
 
     public float _currentHealth;
-
 	private Animator _animator;
-	private bool _distanceCheck = false;
 
 	//Cooldown time between attacks
-	private float _attackCooldownTime = 1.0f;
-	private float _attackCooldownTimeMain = 1.0f;
+	private float _attackCooldownTime = 2.0f;
+	private float _attackCooldownTimeMain = 2.0f;
 	private PersistantData data;
 	private Player player;
     
@@ -68,13 +66,14 @@ public class Enemy : MonoBehaviour
     {
      
        var player1 = FindObjectOfType<Player>();
-
+		_animator.SetBool("Attack", false);
 		float distance = Vector3.Distance(player1.transform.position, this.transform.position);
 		if (distance > 2)
         {
 			GetComponent<NavMeshAgent>().SetDestination(player1.transform.position);
         }else
 		{
+			_animator.SetBool("Attack", true);
 			if (_attackCooldownTime > 0)
             {
 				_attackCooldownTime -= Time.deltaTime;
@@ -83,7 +82,9 @@ public class Enemy : MonoBehaviour
             {
 				_attackCooldownTime = _attackCooldownTimeMain;
 				AttackTarget();
-            }
+				 
+			}
+			
 		}
     }
 	void AttackTarget()
@@ -125,21 +126,7 @@ public class Enemy : MonoBehaviour
 			}
 			
 			if(player.gameObject.GetComponent<Rigidbody>().velocity.y != 0.0f)
-				data.airKills++;
-			
-        }
-            
+				data.airKills++;	
+        }       
     }
-/*	void OnCollisionEnter(
-		Collision collision)
-	{
-
-		var player = collision.collider.GetComponent<Player>();
-		if (player != null)
-		{
-			player.takeDamage(_damage);
-		}
-	}
-
-	*/
 }
