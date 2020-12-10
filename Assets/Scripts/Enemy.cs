@@ -66,7 +66,7 @@ public class Enemy : MonoBehaviour
     {
      
        var player1 = FindObjectOfType<Player>();
-
+		_animator.SetBool("Attack", false);
 		float distance = Vector3.Distance(player1.transform.position, this.transform.position);
 		if (distance > 2)
         {
@@ -82,7 +82,7 @@ public class Enemy : MonoBehaviour
             {
 				_attackCooldownTime = _attackCooldownTimeMain;
 				AttackTarget();
-				 _animator.SetBool("Attack", false);
+				 
 			}
 			
 		}
