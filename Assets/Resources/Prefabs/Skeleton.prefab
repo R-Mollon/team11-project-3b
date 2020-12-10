@@ -562,13 +562,13 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1282699723162631505}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: ade91557865129c47919cf0d193abd7e, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.03449481
-  m_Height: 0.16261284
+  m_Radius: 0.040554345
+  m_Height: 0.18065661
   m_Direction: 1
-  m_Center: {x: -0.000047752263, y: 0.07686011, z: 0.00994984}
+  m_Center: {x: -0.00023325947, y: 0.07192134, z: 0.00994984}
 --- !u!195 &1282699722528495573
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -622,9 +622,9 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 36
   m_CollisionDetection: 0
 --- !u!1 &1282699723162631507
 GameObject:

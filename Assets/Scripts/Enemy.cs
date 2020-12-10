@@ -13,7 +13,7 @@ public class Enemy : MonoBehaviour
 
 	
 	public bool dead;
-	
+	private bool quit = false;
 	private PersistantData playerData;
 	private float numCredits;
 
@@ -21,11 +21,14 @@ public class Enemy : MonoBehaviour
 
 	private Animator _animator;
 	private bool _distanceCheck = false;
-	private float _attackTime = 1.0f;
-	
+
+	//Cooldown time between attacks
+	private float _attackCooldownTime = 1.0f;
+	private float _attackCooldownTimeMain = 1.0f;
 	private PersistantData data;
 	private Player player;
-
+    
+	// Enemy Damage Ammount
 	float _damage = 10.0f;
 
 	void Start()
@@ -53,43 +56,32 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
-        var player = FindObjectOfType<Player>();
-        GetComponent<NavMeshAgent>().SetDestination(player.transform.position);
+     
+       var player1 = FindObjectOfType<Player>();
 
-		float distance = Vector3.Distance(player.transform.position, this.transform.position);
-		if (distance < 5.0f)
+		float distance = Vector3.Distance(player1.transform.position, this.transform.position);
+		if (distance > 2)
         {
-			if (!_distanceCheck)
+			GetComponent<NavMeshAgent>().SetDestination(player1.transform.position);
+        }else
+		{
+			if (_attackCooldownTime > 0)
             {
-				_distanceCheck = true;
-            } else
-            {
-				_attackTime -= Time.deltaTime;
-            }
-			if (_attackTime <= 0.0f)
-            {
-				//Attack
-				_animator.SetBool("Attack", true);
-            }
+				_attackCooldownTime -= Time.deltaTime;
 
-        } else
-        {
-			_animator.SetBool("Attack", false);
-			_distanceCheck = false;
-			_attackTime = 1.0f;
-        }
-
-		
+			} else
+            {
+				_attackCooldownTime = _attackCooldownTimeMain;
+				AttackTarget();
+            }
+		}
     }
-
-	// Animation event
-	public void AttackEnd()
+	void AttackTarget()
     {
-		// send damage to the player
-		//PlayerController.Instance.OnHit(this.gameObject, 35);
-    }
-	
-	
+		var player1 = FindObjectOfType<Player>();
+		player1.takeDamage(_damage);
+	}
+
     public void TakeDamage(float damage) {
 		
         _currentHealth -= damage;
@@ -124,7 +116,7 @@ public class Enemy : MonoBehaviour
         }
             
     }
-	void OnCollisionEnter(
+/*	void OnCollisionEnter(
 		Collision collision)
 	{
 
@@ -132,9 +124,8 @@ public class Enemy : MonoBehaviour
 		if (player != null)
 		{
 			player.takeDamage(_damage);
-
 		}
 	}
 
-
+	*/
 }
