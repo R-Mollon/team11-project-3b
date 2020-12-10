@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class PersistantData : MonoBehaviour
 {
@@ -28,6 +29,69 @@ public class PersistantData : MonoBehaviour
 	public float creditsMult = 1;
 	public int creditsMultUpgrades = 0;
 	/* ------------------ */
+	
+	/* Current Challenges */
+	public int currentChallengeOne = 0;
+	public int currentChallengeTwo = 0;
+	public int currentChallengeThree = 0;
+	
+	public int handgunKills = 0;
+	public int automaticKills = 0;
+	public int shotgunKills = 0;
+	public int swordKills = 0;
+	public int airKills = 0;
+	/* ------------------ */
+	
+	/* Challenge List */
+	public Challenge[] challenges = new[] {
+		new Challenge() { description = "Kill 20 enemies with the handgun", reward = 20},
+		new Challenge() { description = "Kill 40 enemies with the handgun", reward = 40},
+		new Challenge() { description = "Kill 60 enemies with the handgun", reward = 60},
+		
+		new Challenge() { description = "Kill 20 enemies with the M4", reward = 10},
+		new Challenge() { description = "Kill 40 enemies with the M4", reward = 20},
+		new Challenge() { description = "Kill 60 enemies with the M4", reward = 30},
+		
+		new Challenge() { description = "Kill 20 enemies with the Shotgun", reward = 8},
+		new Challenge() { description = "Kill 40 enemies with the Shotgun", reward = 16},
+		new Challenge() { description = "Kill 60 enemies with the Shotgun", reward = 32},
+		
+		new Challenge() { description = "Kill 20 enemies with the Sword", reward = 20},
+		new Challenge() { description = "Kill 40 enemies with the Sword", reward = 40},
+		new Challenge() { description = "Kill 60 enemies with the Sword", reward = 60},
+		
+		new Challenge() { description = "Kill 20 enemies while airborne", reward = 30},
+		new Challenge() { description = "Kill 40 enemies while airborne", reward = 60},
+		new Challenge() { description = "Kill 60 enemies while airborne", reward = 80},
+	};
+	/* -------------- */
+	
+	
+	public void rollChallenge(int challenge) {
+		
+		switch(challenge) {
+			case 1:
+				while(currentChallengeOne == currentChallengeTwo || currentChallengeOne == currentChallengeThree)
+					currentChallengeOne   = (int) Math.Floor(UnityEngine.Random.value * challenges.Length);
+				break;
+			case 2:
+				while(currentChallengeTwo == currentChallengeOne || currentChallengeTwo == currentChallengeThree)
+					currentChallengeTwo   = (int) Math.Floor(UnityEngine.Random.value * challenges.Length);
+				break;
+			case 3:
+				while(currentChallengeThree == currentChallengeOne || currentChallengeThree == currentChallengeTwo)
+					currentChallengeThree = (int) Math.Floor(UnityEngine.Random.value * challenges.Length);
+				break;
+		}
+		
+	}
+	
+	
+	public void Start() {
+		rollChallenge(1);
+		rollChallenge(2);
+		rollChallenge(3);
+	}
 	
 	
 	// Reset all data
@@ -66,4 +130,11 @@ public class PersistantData : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
     }
 	
+	public class Challenge {
+		public string description;
+		public int reward;
+	}
+	
 }
+
+
