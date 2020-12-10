@@ -163,10 +163,10 @@ public class MainMenuController : MonoBehaviour {
 	
 	IEnumerator smoothPanLR() {
 		
-		for(int i = 0; i < 100; i++) {
-			mainCamera.transform.Translate(panTarget / 100, 0, 0);
+		for(int i = 0; i < 50; i++) {
+			mainCamera.transform.Translate(panTarget / 50, 0, 0);
 			
-			yield return new WaitForSecondsRealtime(0.0008f);
+			yield return new WaitForSecondsRealtime(0.0004f);
 		}
 		
 		yield return null;
@@ -197,10 +197,10 @@ public class MainMenuController : MonoBehaviour {
 	
 	IEnumerator smoothPanUD() {
 		
-		for(int i = 0; i < 100; i++) {
-			mainCamera.transform.Translate(0, panTarget / 100, 0);
+		for(int i = 0; i < 50; i++) {
+			mainCamera.transform.Translate(0, panTarget / 50, 0);
 			
-			yield return new WaitForSecondsRealtime(0.0008f);
+			yield return new WaitForSecondsRealtime(0.0004f);
 		}
 		
 		yield return null;
