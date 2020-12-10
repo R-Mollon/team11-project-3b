@@ -626,7 +626,7 @@ public class Player : MonoBehaviour {
 			
 			if(takenDamage) {
 				takenDamage = false;
-				yield return new WaitForSecondsRealtime(1.5f);
+				yield return new WaitForSecondsRealtime(3.0f);
 			}
 			
 			while(health < maxHealth && !takenDamage) {
