@@ -15,6 +15,7 @@ public class Player : MonoBehaviour {
 	public float playerSpeed = 5.0f;
 
 	public static bool paused;
+	public bool dead;
 	
 	public int credits;
 	public float creditsDecimal;
@@ -605,6 +606,9 @@ public class Player : MonoBehaviour {
 	public void takeDamage(float damage)
     {
 		
+		if(dead)
+			return;
+		
 		hurtSound.Play(0);
 		
 		health -= damage;
@@ -647,6 +651,7 @@ public class Player : MonoBehaviour {
 		
 		Time.timeScale = 0;
 		paused = true;
+		dead = true;
 		
 		countedPersistantCredits = 0;
 		countedGameCredits = 0;
