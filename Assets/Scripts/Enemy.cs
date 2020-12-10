@@ -7,13 +7,13 @@ using UnityEngine.AI;
 public class Enemy : MonoBehaviour
 {
 
-    [SerializeField] GameObject _hitPrefab;
-    [SerializeField] GameObject _explosionPrefab;
+    public GameObject _hitPrefab;
+    public GameObject _explosionPrefab;
     public float _health = 20.0f;
 
 	
 	public bool dead;
-	private bool quit = false;
+
 	private PersistantData playerData;
 	private float numCredits;
 
@@ -113,6 +113,7 @@ public class Enemy : MonoBehaviour
         if (_currentHealth <= 0.0f && !dead) {
 			
 			dead = true;
+			gameObject.GetComponent<CapsuleCollider>().enabled = false;
 			_animator.SetBool("Death", true);
 			
 
