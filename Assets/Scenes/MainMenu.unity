@@ -14404,7 +14404,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2ff08ab2476fa0438eac70783b529c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  credits: 1000000
+  credits: 0
   handgunDamage: 1
   handgunDamageUpgrades: 0
   handgunReload: 1

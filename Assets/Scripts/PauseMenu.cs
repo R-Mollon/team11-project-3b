@@ -38,6 +38,7 @@ public class PauseMenu : MonoBehaviour
     void openMenu()
     {
         Time.timeScale = 0;
+		Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         Player.paused = true;
         pauseUI.enabled = true;
@@ -48,12 +49,14 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1;
         pauseUI.enabled = false;
         Player.paused = false;
+		Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
     }
 
     public void returnToMainMenu()
     {
         closeMenu();
+		Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         SceneManager.LoadScene(0);
     }

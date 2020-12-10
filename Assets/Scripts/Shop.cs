@@ -39,6 +39,7 @@ public class Shop : MonoBehaviour
         atShop = true;
         player.velocity = new Vector3(0, 0, 0);
         Player.paused = true;
+		Cursor.visible = true;
         Cursor.lockState = CursorLockMode.Confined;
         shopUI.enabled = true;
     }
@@ -48,6 +49,7 @@ public class Shop : MonoBehaviour
         atShop = false;
         Player.paused = false;
         shopUI.enabled = false;
+		Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
     }
 

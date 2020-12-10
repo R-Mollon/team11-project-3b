@@ -122,6 +122,7 @@ public class Player : MonoBehaviour {
 		
 		
 		// Lock cursor
+		Cursor.visible = false;
 		Cursor.lockState = CursorLockMode.Locked;
 		paused = false;
 		
@@ -654,6 +655,7 @@ public class Player : MonoBehaviour {
 		countedGameCredits = 0;
 		newCredits = playerData.credits + credits;
 		HUDCanvas.alpha = 0;
+		Cursor.visible = true;
 		Cursor.lockState = CursorLockMode.None;
 		StopAllCoroutines();
 		
