@@ -81,6 +81,8 @@ public class Player : MonoBehaviour {
 	private Text UIchallengeText;
 	private int completedChallenge;
 	
+	private AudioSource stepSound;
+	
 	
 	void Start() {
 		
@@ -114,6 +116,7 @@ public class Player : MonoBehaviour {
 		UIchallengeText = GameObject.Find("HUD/Challenges/ChallengeText").GetComponent<Text>();
 		
 		dingSound = GameObject.Find("DeathHUD/DeathBackground/Ding Sound").GetComponent<AudioSource>();
+		stepSound = gameObject.GetComponent<AudioSource>();
 		
 		
 		// Lock cursor
@@ -137,6 +140,7 @@ public class Player : MonoBehaviour {
 		completedChallenge = -1;
 		
 		StartCoroutine("PlayerHeal");
+		StartCoroutine("WalkSound");
 		
 	}
 	
@@ -579,6 +583,19 @@ public class Player : MonoBehaviour {
 		UIchallengeText.color = new Color(0, 0, 0, 0);
 		
 		yield return null;
+	}
+	
+	
+	IEnumerator WalkSound() {
+		
+		while(true) {
+			
+			if((playerBody.velocity.x > 0.0f || playerBody.velocity.z > 0.0f) && playerBody.velocity.y == 0)
+				stepSound.PlayOneShot(stepSound.clip, 1.5f);
+			
+			yield return new WaitForSecondsRealtime((15.0f - playerSpeed) / 20.0f);
+		}
+		
 	}
 	
 	
