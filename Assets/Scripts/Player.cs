@@ -45,7 +45,7 @@ public class Player : MonoBehaviour {
 
 	public bool reloading;
 	public bool firing;
-	private int equippedWeapon = 1;
+	public int equippedWeapon = 1;
 	
 	private Text UIweaponName;
 	private Text UIweaponShots;

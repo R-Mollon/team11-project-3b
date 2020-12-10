@@ -22,6 +22,9 @@ public class Enemy : MonoBehaviour
 	private Animator _animator;
 	private bool _distanceCheck = false;
 	private float _attackTime = 1.0f;
+	
+	private PersistantData data;
+	private Player player;
 
 	float _damage = 10.0f;
 
@@ -42,6 +45,9 @@ public class Enemy : MonoBehaviour
 			
 			numCredits = playerData.creditsMult;
 		}
+		
+		data = GameObject.Find("PersistantData").GetComponent<PersistantData>();
+		player = GameObject.Find("Player").GetComponent<Player>();
     }
 
 
@@ -96,6 +102,24 @@ public class Enemy : MonoBehaviour
             Destroy(this.gameObject);
 			
 			GameObject.Find("Player").GetComponent<Player>().creditsDecimal += numCredits;
+			
+			switch(player.equippedWeapon) {
+				case 1:
+					data.handgunKills++;
+					break;
+				case 2:
+					data.automaticKills++;
+					break;
+				case 3:
+					data.shotgunKills++;
+					break;
+				case 4:
+					data.swordKills++;
+					break;
+			}
+			
+			if(player.gameObject.GetComponent<Rigidbody>().velocity.y != 0.0f)
+				data.airKills++;
 			
         }
             
