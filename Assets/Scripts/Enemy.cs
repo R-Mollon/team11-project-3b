@@ -18,8 +18,8 @@ public class Enemy : MonoBehaviour
 	public Animator _animator;
 
 	//Cooldown time between attacks
-	private float _attackCooldownTime = -1.0f;
-	private float _attackCooldownTimeMain = 2.15f;
+	private float _attackCooldownTime = -0.3f;
+	private float _attackCooldownTimeMain = 1.15f;
 	private PersistantData data;
 	private Player player;
     
