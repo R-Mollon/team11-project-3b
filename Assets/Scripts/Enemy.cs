@@ -120,6 +120,10 @@ public class Enemy : MonoBehaviour
 			gameObject.GetComponent<CapsuleCollider>().enabled = false;
 			_animator.SetBool("Death", true);
 			
+			foreach(BoxCollider collider in gameObject.GetComponentsInChildren<BoxCollider>()) {
+				collider.enabled = false;
+			}
+			
 
 			StartCoroutine("DeathAnimation");
 			
