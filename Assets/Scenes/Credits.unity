@@ -648,8 +648,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -2537}
-  m_SizeDelta: {x: 700, y: 4500}
+  m_AnchoredPosition: {x: 0, y: -3526}
+  m_SizeDelta: {x: 700, y: 6500}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1593735027
 MonoBehaviour:
@@ -685,105 +685,38 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 'Producer
 
-    
+
 
     David Oyos
 
-    
 
-    
+
+
 
     Production Manager
 
-    
 
-    Sam
-    Saenz
-
-    
-
-    
-
-    Production Coordinator
-
-    
-
-    Riley Mollon
-
-    
-
-    
-
-    Game
-    Designers
-
-    
-
-    Riley Mollon
-
-    Austin Eccher
 
     Sam Saenz
 
-    David
-    Oyos
 
-    
 
-    
 
-    Systems/IT Coordinator
 
-    
+    Production
+    Coordinator
 
-    David Oyos
 
-    
 
-    
+    Riley Mollon
 
-    Programmers
 
-    
 
-    Riley
-    Mollon
 
-    Austin Eccher
 
-    Sam Saenz
+    Game Designers
 
-    David Oyos
 
-    
-
-    
-
-    Technical
-    Artists
-
-    
-
-    Austin Eccher
-
-    
-
-    
-
-    Audio Engineers
-
-    
-
-    Riley
-    Mollon
-
-    
-
-    
-
-    UX Testers
-
-    
 
     Riley Mollon
 
@@ -794,147 +727,210 @@ MonoBehaviour:
 
     David Oyos
 
-    
 
-    
+
+
+
+    Systems/IT Coordinator
+
+
+
+    David
+    Oyos
+
+
+
+
+
+    Programmers
+
+
+
+    Riley Mollon
+
+    Austin Eccher
+
+    Sam Saenz
+
+    David
+    Oyos
+
+
+
+
+
+    Technical Artists
+
+
+
+    Austin Eccher
+
+
+
+
+
+    Audio Engineers
+
+
+
+    Riley
+    Mollon
+
+
+
+
+
+    UX Testers
+
+
+
+    Riley Mollon
+
+    Austin Eccher
+
+    Sam Saenz
+
+    David
+    Oyos
+
+
+
+
 
     Music:
 
-    
 
-    Ether
-    Vox by Kevin MacLeod
+
+    Ether Vox by Kevin MacLeod
 
     Link: https://incompetech.filmmusic.io/song/7014-ether-vox
 
     License:
     http://creativecommons.org/licenses/by/4.0/
 
-    
 
-    
 
-    Scp x1x (Gateway
-    to Hell) by Kevin MacLeod
+
+
+    Scp x1x (Gateway to Hell)
+    by Kevin MacLeod
 
     Link: https://incompetech.filmmusic.io/song/6732-scp-x1x-gateway-to-hell-
 
     License:
     http://creativecommons.org/licenses/by/4.0/
 
-    
 
-    
 
-    Scp X3x (I Am
-    Not OK) by Kevin MacLeod
+
+
+    Scp X3x (I Am Not OK) by
+    Kevin MacLeod
 
     Link: https://incompetech.filmmusic.io/song/6733-scp-x3x-i-am-not-ok-
 
     License:
     http://creativecommons.org/licenses/by/4.0/
 
-    
 
-    
 
-    
+
+
+
 
     SFX:
 
-    
 
-    Handgun
-    Shot:
+
+    Handgun Shot:
 
     https://freesound.org/people/Nagwense/sounds/407662/
 
-    
+
 
     Handgun
     Reload:
 
     https://freesound.org/people/nioczkus/sounds/396331/
 
-    
+
 
     Dry
     Fire:
 
     https://freesound.org/people/FilmmakersManual/sounds/522414/
 
-    
+
 
     M4
     Shot:
 
     https://freesound.org/people/ninebilly/sounds/520934/
 
-    
 
-    M4
-    Reload:
+
+    M4 Reload:
 
     https://freesound.org/people/kennysvoice/sounds/351778/
 
-    
+
 
     Shotgun
     Shot:
 
     https://freesound.org/people/Marregheriti/sounds/266105/
 
-    
+
 
     Shotgun
     Reload:
 
     https://freesound.org/people/lensflare8642/sounds/145209/
 
-    
+
 
     Sword
     Swipe:
 
     https://freesound.org/people/deleted_user_6479820/sounds/380488/
 
-    
+
 
     Buy
     Sound:
 
     https://freesound.org/people/deleted_user_96253/sounds/351304/
 
-    
+
 
     Footstep:
 
     https://freesound.org/people/swuing/sounds/38874/
 
-    
+
 
     Bullet
     Hit:
 
     https://freesound.org/people/FilmmakersManual/sounds/522504/
 
-    
+
 
     Player
     Hurt:
 
     https://freesound.org/people/bananplyte/sounds/452155/
 
-    
 
-    
 
-    
+
+
+
 
     Asset
     Packages:
 
-    
+
 
     Guns:
 
@@ -942,7 +938,7 @@ MonoBehaviour:
 
     https://assetstore.unity.com/packages/3d/props/guns/low-poly-weapons-vol-1-151980
 
-    
+
 
     Sword:
 
@@ -950,7 +946,7 @@ MonoBehaviour:
 
     https://assetstore.unity.com/packages/3d/props/weapons/melee-weapons-pack-swords-axes-121237
 
-    
+
 
     Skeleton
     Enemy:
@@ -959,7 +955,7 @@ MonoBehaviour:
 
     https://assetstore.unity.com/packages/3d/characters/humanoids/fantasy-monster-skeleton-35635
 
-    
+
 
     Locker
     Model:
@@ -968,7 +964,7 @@ MonoBehaviour:
 
     https://assetstore.unity.com/packages/3d/props/locker-56405
 
-    
+
 
     Stump
     Model:
@@ -977,7 +973,7 @@ MonoBehaviour:
 
     https://assetstore.unity.com/packages/3d/environments/photogrammetry-stump-140444
 
-    
+
 
     Terrain
     Textures:
@@ -986,7 +982,7 @@ MonoBehaviour:
 
     https://assetstore.unity.com/packages/2d/textures-materials/floors/outdoor-ground-textures-12555
 
-    
+
 
     Trees:
 

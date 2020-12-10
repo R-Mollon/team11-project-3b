@@ -7,7 +7,7 @@ public class CreditsManager : MonoBehaviour {
 	
 	private Transform creditsText;
 	
-	private float targetPos = 2500.0f;
+	private float targetPos = 3600.0f;
 	
 	void Start() {
 		
@@ -32,7 +32,7 @@ public class CreditsManager : MonoBehaviour {
 		
 		while(creditsText.localPosition.y < targetPos) {
 			
-			creditsText.Translate(0, Screen.height / 600.0f, 0);
+			creditsText.Translate(0, Screen.height / 300.0f, 0);
 			
 			yield return new WaitForSecondsRealtime(0.0000001f);
 		}
